@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -59,10 +60,9 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            //setResult(Activity.RESULT_OK)
         })
 
         username.afterTextChanged {
