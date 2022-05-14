@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PokeTeam App</string>
+    <string name="prompt_email">Correo electrónico</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Entrar o registrarme</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="welcome">¡Bienvenido !</string>
+    <string name="invalid_username">Nombre de usuario no válido</string>
+    <string name="invalid_password">La contraseña debe tener >5 caracteres</string>
+    <string name="login_failed">Inicio de sesión fallido</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_nav_share">Compartir</string>
+    <string name="menu_nav_send">Enviar</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="menu_logout">Cerrar sesión</string>
+    <string name="title_settings">Ajustes</string>
+    <string name="change_language">Cambiar idioma</string>
+    <string name="language">Español</string>
+</resources>
