@@ -13,9 +13,14 @@
 
     <!-- Strings related to menus -->
     <string name="menu_settings">Settings</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_nav_share">Share</string>
+    <string name="menu_nav_send">Send</string>
     <string name="copyright">© Ana Martínez Montañez</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    <string name="menu_logout">Sign out</string>
+
+    <!-- Sync Preferences -->
+    <string name="title_settings">Settings</string>
+
 </resources>

@@ -13,6 +13,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
@@ -96,6 +98,10 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
