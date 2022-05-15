@@ -17,5 +17,7 @@
     <string name="menu_logout">Cerrar sesión</string>
     <string name="title_settings">Ajustes</string>
     <string name="change_language">Cambiar idioma</string>
-    <string name="language">Español</string>
+    <string name="modify_user_data">Modificar datos de usuario</string>
+    <string name="language_english">Inglés</string>
+    <string name="language_spanish">Español</string>
 </resources>
