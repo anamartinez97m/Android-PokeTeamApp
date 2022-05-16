@@ -20,4 +20,7 @@
     <string name="modify_user_data">Modificar datos de usuario</string>
     <string name="language_english">Inglés</string>
     <string name="language_spanish">Español</string>
+    <string name="logout_confirmation">¿Estás seguro que quieres cerrar sesión?</string>
+    <string name="logout_confirmation_ok">Sí, cerrar sesión</string>
+    <string name="cancel">Cancelar</string>
 </resources>

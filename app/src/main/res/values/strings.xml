@@ -27,4 +27,9 @@
     <string name="language_english">English</string>
     <string name="language_spanish">Spanish</string>
 
+    <!-- Commons -->
+    <string name="logout_confirmation">Are you sure you want to logout?</string>
+    <string name="logout_confirmation_ok">Yes, logout</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
