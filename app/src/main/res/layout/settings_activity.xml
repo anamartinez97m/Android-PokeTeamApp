@@ -13,7 +13,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/Theme.PokeTeamApp" />
+        android:theme="@style/Theme.PokeTeamApp"/>
 
     <ExpandableListView
         android:id="@+id/expandable_list_view"

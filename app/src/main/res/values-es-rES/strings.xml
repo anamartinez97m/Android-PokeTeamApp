@@ -18,12 +18,12 @@
     <string name="title_settings">Ajustes</string>
     <string name="change_language">Cambiar idioma</string>
     <string name="modify_user_data">Modificar datos de usuario</string>
-    <string name="language_english">Inglés</string>
-    <string name="language_spanish">Español</string>
+    <string name="en_US">Inglés</string>
+    <string name="es_ES">Español</string>
     <string name="logout_confirmation">¿Estás seguro que quieres cerrar sesión?</string>
     <string name="logout_confirmation_ok">Sí, cerrar sesión</string>
     <string name="cancel">Cancelar</string>
     <string name="forgot_password">He olvidado la contraseña</string>
-    <string name="still_not_connected">¿Aún no tienes cuenta?</string>
+    <string name="still_not_connected">"¿Aún no tienes cuenta? "</string>
     <string name="sign_up">Registrarme</string>
 </resources>

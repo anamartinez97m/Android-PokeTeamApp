@@ -14,6 +14,7 @@ class LogoutConfirmationDialogFragment : DialogFragment() {
             .setMessage(getString(R.string.logout_confirmation))
             .setPositiveButton(getString(R.string.logout_confirmation_ok)) { _,_ ->
                 val intent = Intent(requireContext(), LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
                 startActivity(intent)
             }
             .setNegativeButton(getString(R.string.cancel)) { _,_ -> dismiss() }

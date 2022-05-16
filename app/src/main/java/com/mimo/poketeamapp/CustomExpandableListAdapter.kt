@@ -27,7 +27,6 @@ class CustomExpandableListAdapter(
         isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
         var convertViewVar: View? = convertView
         val expandedListText = getChild(listPosition, expandedListPosition) as String
-        Log.d("hola", expandedListText)
         if (convertViewVar == null) {
             val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertViewVar = layoutInflater.inflate(R.layout.list_item, null)
@@ -38,7 +37,6 @@ class CustomExpandableListAdapter(
     }
 
     override fun getChildrenCount(listPosition: Int): Int {
-        Log.d("hola", (expandableListDetail[expandableListTitle[listPosition]]?.size ?: 0).toString())
         return expandableListDetail[expandableListTitle[listPosition]]?.size ?: 0
     }
 
