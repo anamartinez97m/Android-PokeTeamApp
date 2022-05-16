@@ -16,8 +16,11 @@ import androidx.annotation.StringRes
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
+import com.mimo.poketeamapp.database.AppDatabase
+import com.mimo.poketeamapp.database.entity.User
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -28,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        //val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").build()
+        //val userDao = db.userDao()
+        //val users: List<User> = userDao.getAll()
+        //Log.d("users", users.toString())
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
