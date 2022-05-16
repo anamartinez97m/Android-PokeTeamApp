@@ -31,5 +31,8 @@
     <string name="logout_confirmation">Are you sure you want to logout?</string>
     <string name="logout_confirmation_ok">Yes, logout</string>
     <string name="cancel">Cancel</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="still_not_connected">Still not connected?</string>
+    <string name="sign_up">Sign Up</string>
 
 </resources>

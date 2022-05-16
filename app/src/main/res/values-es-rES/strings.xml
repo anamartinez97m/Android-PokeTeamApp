@@ -23,4 +23,7 @@
     <string name="logout_confirmation">¿Estás seguro que quieres cerrar sesión?</string>
     <string name="logout_confirmation_ok">Sí, cerrar sesión</string>
     <string name="cancel">Cancelar</string>
+    <string name="forgot_password">He olvidado la contraseña</string>
+    <string name="still_not_connected">¿Aún no tienes cuenta?</string>
+    <string name="sign_up">Registrarme</string>
 </resources>
