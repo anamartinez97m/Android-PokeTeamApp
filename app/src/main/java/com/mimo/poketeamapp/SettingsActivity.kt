@@ -2,7 +2,6 @@ package com.mimo.poketeamapp
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +20,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.activity_settings)
 
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
         toolbar.setTitle(R.string.title_settings)
@@ -29,7 +28,6 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         //supportActionBar?.setIcon(R.drawable.ic_baseline_arrow_back_ios_24)
-
 
         val expandableListView: ExpandableListView = findViewById(R.id.expandable_list_view)
         addDataToHashMap()
@@ -88,7 +86,7 @@ class SettingsActivity : AppCompatActivity() {
         Locale.setDefault(locale)
         conf.setLocale(locale)
         createConfigurationContext(conf)
-        //this.setContentView(R.layout.settings_activity)
+        //this.setContentView(R.layout.activity_settings)
     }
 
 }

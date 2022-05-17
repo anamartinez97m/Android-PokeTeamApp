@@ -10,8 +10,8 @@
     <string name="invalid_password">La contraseña debe tener >5 caracteres</string>
     <string name="login_failed">Inicio de sesión fallido</string>
     <string name="menu_settings">Ajustes</string>
-    <string name="menu_nav_share">Compartir</string>
-    <string name="menu_nav_send">Enviar</string>
+    <string name="menu_nav_team">Equipo de Pokemons</string>
+    <string name="menu_nav_poke_list">Lista de Pokemons</string>
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Cerrar</string>
     <string name="menu_logout">Cerrar sesión</string>
@@ -26,4 +26,10 @@
     <string name="forgot_password">He olvidado la contraseña</string>
     <string name="still_not_connected">"¿Aún no tienes cuenta? "</string>
     <string name="sign_up">Registrarme</string>
+    <string name="title_poke_list">Listado de Pokemons</string>
+    <string name="title_pokemon_team">Mi Equipo Pokemon</string>
+    <string name="menu_nav_tutorial">Tutorial</string>
+    <string name="menu_nav_about">Acerca de</string>
+    <string name="information">Información</string>
+    <string name="title_about">Acerca de</string>
 </resources>

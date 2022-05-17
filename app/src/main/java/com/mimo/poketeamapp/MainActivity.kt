@@ -64,7 +64,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.menu_nav_share -> {
+        R.id.menu_nav_team -> {
+            val intent = Intent(this, PokeTeamActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.menu_nav_poke_list -> {
+            val intent = Intent(this, PokeListActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.menu_nav_tutorial -> {
+            true
+        }
+        R.id.menu_nav_about -> {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
             true
         }
         else -> {
