@@ -75,6 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             true
         }
         R.id.menu_nav_tutorial -> {
+            val intent = Intent(this, TutorialActivity::class.java)
+            startActivity(intent)
             true
         }
         R.id.menu_nav_about -> {

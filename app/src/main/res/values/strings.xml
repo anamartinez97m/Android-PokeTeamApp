@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PokeTeam App</string>
+    <string name="app_name" translatable="false">PokeTeam App</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -40,5 +40,13 @@
     <string name="menu_nav_about">About</string>
     <string name="information">Information</string>
     <string name="title_about">About</string>
+    <string name="app_version" translatable="false">v1.0.0 (Database v1.0.0)</string>
+    <string name="app_subject" translatable="false">Desarrollo de Aplicaciones Android</string>
+    <string name="app_mimo" translatable="false">Máster Universitario Informática Móvil</string>
+    <string name="app_university" translatable="false">Universidad Pontificia de Salamanca</string>
+    <string name="app_api_text">This product uses the PokeAPI API.</string>
+    <string name="app_api_link" translatable="false">https://pokeapi.co/</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="skip">Skip</string>
 
 </resources>
