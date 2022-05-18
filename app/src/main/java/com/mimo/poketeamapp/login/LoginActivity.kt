@@ -14,8 +14,10 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.mimo.poketeamapp.ForgotPasswordActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
+import com.mimo.poketeamapp.RegisterUserActivity
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.database.entity.User
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
@@ -39,6 +41,8 @@ class LoginActivity : AppCompatActivity() {
 
         val username = binding.username
         val password = binding.password
+        val forgotPassword = binding.forgotPassword
+        val registerUser = binding.signUp
         val login = binding.login
         val loading = binding.loading
 
@@ -102,6 +106,16 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+        }
+
+        forgotPassword.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+        registerUser.setOnClickListener {
+            val intent = Intent(this, RegisterUserActivity::class.java)
+            startActivity(intent)
         }
     }
 
