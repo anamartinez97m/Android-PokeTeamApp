@@ -34,4 +34,11 @@
     <string name="app_api_text">Este producto utiliza la API de PokeAPI.</string>
     <string name="title_tutorial">Tutorial</string>
     <string name="skip">Omitir</string>
+    <string name="title_forgot_password">Nueva contraseña</string>
+    <string name="prompt_new_password">Nueva contraseña</string>
+    <string name="prompt_repeat_new_password">Repetir nueva contraseña</string>
+    <string name="save">Guardar</string>
+    <string name="title_register_user">Registro de usuario</string>
+    <string name="prompt_user_name">Nombre</string>
+    <string name="prompt_user_surname">Apellidos</string>
 </resources>

@@ -48,5 +48,12 @@
     <string name="app_api_link" translatable="false">https://pokeapi.co/</string>
     <string name="title_tutorial">Tutorial</string>
     <string name="skip">Skip</string>
+    <string name="title_forgot_password">New Password</string>
+    <string name="prompt_new_password">New password</string>
+    <string name="prompt_repeat_new_password">Repeat new password</string>
+    <string name="save">Save</string>
+    <string name="title_register_user">User Registration</string>
+    <string name="prompt_user_name">Name</string>
+    <string name="prompt_user_surname">Surname</string>
 
 </resources>

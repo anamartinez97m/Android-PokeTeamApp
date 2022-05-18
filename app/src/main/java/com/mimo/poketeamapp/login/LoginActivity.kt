@@ -1,6 +1,5 @@
 package com.mimo.poketeamapp.login
 
-import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +12,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.mimo.poketeamapp.MainActivity
@@ -32,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").build()
+        //val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database").build()
         //val userDao = db.userDao()
         //val users: List<User> = userDao.getAll()
         //Log.d("users", users.toString())
