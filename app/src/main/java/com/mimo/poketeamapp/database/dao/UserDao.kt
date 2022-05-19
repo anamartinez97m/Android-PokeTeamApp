@@ -8,4 +8,7 @@ import com.mimo.poketeamapp.database.entity.User
 interface UserDao {
     @Query("SELECT * FROM USER")
     fun getAll(): List<User>
+
+    @Query("INSERT INTO USER(name, surname, email, password) VALUES (:name, :surname, :email, :password)")
+    fun insertUser(name: String, surname: String, email: String, password: String)
 }

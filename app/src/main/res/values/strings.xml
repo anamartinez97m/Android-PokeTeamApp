@@ -55,5 +55,6 @@
     <string name="title_register_user">User Registration</string>
     <string name="prompt_user_name">Name</string>
     <string name="prompt_user_surname">Surname</string>
+    <string name="invalid_repeated_password">Passwords must be the same</string>
 
 </resources>

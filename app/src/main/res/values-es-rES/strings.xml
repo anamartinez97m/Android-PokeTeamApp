@@ -41,4 +41,5 @@
     <string name="title_register_user">Registro de usuario</string>
     <string name="prompt_user_name">Nombre</string>
     <string name="prompt_user_surname">Apellidos</string>
+    <string name="invalid_repeated_password">Las contraseñas deben ser iguales</string>
 </resources>

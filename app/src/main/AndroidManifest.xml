@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".RegisterUserActivity"
+            android:name=".registration.RegisterUserActivity"
             android:exported="false" />
         <activity
             android:name=".ForgotPasswordActivity"

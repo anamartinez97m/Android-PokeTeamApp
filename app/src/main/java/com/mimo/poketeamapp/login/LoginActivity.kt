@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -17,9 +16,8 @@ import androidx.room.Room
 import com.mimo.poketeamapp.ForgotPasswordActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
-import com.mimo.poketeamapp.RegisterUserActivity
 import com.mimo.poketeamapp.database.AppDatabase
-import com.mimo.poketeamapp.database.entity.User
+import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -31,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database").build()
+//        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database").build()
         //val userDao = db.userDao()
         //val users: List<User> = userDao.getAll()
         //Log.d("users", users.toString())
