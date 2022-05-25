@@ -12,11 +12,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import com.mimo.poketeamapp.ForgotPasswordActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
-import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 
@@ -28,11 +26,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-//        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database").build()
-        //val userDao = db.userDao()
-        //val users: List<User> = userDao.getAll()
-        //Log.d("users", users.toString())
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -50,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
-            // disable login button unless both username / password is valid
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
