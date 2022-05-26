@@ -1,6 +1,5 @@
 package com.mimo.poketeamapp.registration
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.data.RegistrationRepository
 import com.mimo.poketeamapp.data.Result
-import com.mimo.poketeamapp.login.LoggedInUserView
-import com.mimo.poketeamapp.login.LoginResult
 
 class RegistrationViewModel(private val registrationRepository: RegistrationRepository): ViewModel() {
 
@@ -23,9 +20,9 @@ class RegistrationViewModel(private val registrationRepository: RegistrationRepo
         val result = registrationRepository.registrate(name, surname, email, password)
 
         if (result is Result.Success) {
-            _registrationResult.value = RegistrationResult(success = R.string.success)
+            _registrationResult.value = RegistrationResult(success = R.string.registration_correct)
         } else {
-            _registrationResult.value = RegistrationResult(error = R.string.login_failed)
+            _registrationResult.value = RegistrationResult(error = R.string.registration_failed)
         }
     }
 

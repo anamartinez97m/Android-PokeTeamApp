@@ -5,9 +5,9 @@
     <string name="action_sign_in">Entrar o registrarme</string>
     <string name="action_sign_in_short">Entrar</string>
     <string name="welcome">¡Bienvenido !</string>
-    <string name="invalid_username">Nombre de usuario no válido</string>
+    <string name="invalid_username">Email no válido</string>
     <string name="invalid_password">La contraseña debe tener >3 caracteres</string>
-    <string name="login_failed">Inicio de sesión fallido</string>
+    <string name="login_failed">El email o la contraseña son incorrectos</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_nav_team">Equipo de Pokemons</string>
     <string name="menu_nav_poke_list">Lista de Pokemons</string>
@@ -44,4 +44,8 @@
     <string name="invalid_repeated_password">Las contraseñas deben ser iguales</string>
     <string name="invalid_email">Email no válido</string>
     <string name="success">Éxito</string>
+    <string name="registration_failed">El registro ha fallado</string>
+    <string name="userAlreadyExists">El usuario ya existe</string>
+    <string name="login_correct">Inicio de sesión correcto</string>
+    <string name="registration_correct">Registro correcto</string>
 </resources>

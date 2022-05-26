@@ -13,7 +13,7 @@
             android:name=".registration.RegisterUserActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".forgotPassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".TutorialActivity"

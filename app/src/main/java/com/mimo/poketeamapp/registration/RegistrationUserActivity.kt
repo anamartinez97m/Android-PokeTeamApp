@@ -28,7 +28,10 @@ class RegisterUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
 
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database").build()
+        val db = Room
+            .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
+            .allowMainThreadQueries()
+            .build()
 
         binding = ActivityRegisterUserBinding.inflate(layoutInflater)
         setContentView(binding.root)

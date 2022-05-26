@@ -12,9 +12,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
-import com.mimo.poketeamapp.ForgotPasswordActivity
+import androidx.room.Room
+import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
+import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 
@@ -27,6 +29,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val db = Room
+            .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
+            .allowMainThreadQueries()
+            .build()
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         val login = binding.login
         val loading = binding.loading
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(db))
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {

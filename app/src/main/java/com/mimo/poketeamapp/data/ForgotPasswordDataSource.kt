@@ -5,14 +5,14 @@ import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.database.entity.User
 import java.io.IOException
 
-class RegistrationDataSource(private val db: AppDatabase) {
+class ForgotPasswordDataSource(private val db: AppDatabase) {
 
-    fun registrate(name: String, surname: String, email: String, password: String): Result<*> {
+    fun updatePassword(email: String, password: String): Result<*> {
         return try {
             val userDao = db.userDao()
 
-            if(db.userDao().doesUserExist(email) == 0) {
-                userDao.insertUser(name, surname, email, password)
+            if(db.userDao().doesUserExistWithSamePassword(email, password) == 0) {
+                userDao.updateUserPassword(email, password)
                 Result.Success("Ok")
             } else {
                 Result.Error(IOException("Error in registration"))
@@ -21,5 +21,4 @@ class RegistrationDataSource(private val db: AppDatabase) {
             Result.Error(IOException("Error in registration", e))
         }
     }
-
 }

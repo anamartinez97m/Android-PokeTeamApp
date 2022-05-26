@@ -1,24 +1,17 @@
 package com.mimo.poketeamapp.data
 
-import com.mimo.poketeamapp.data.model.LoggedInUser
+import com.mimo.poketeamapp.database.AppDatabase
 import java.io.IOException
 
-/**
- * Class that handles authentication w/ login credentials and retrieves user information.
- */
-class LoginDataSource {
+class LoginDataSource(private val db: AppDatabase) {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
-        try {
-            // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+    fun login(username: String, password: String): Result<*> {
+        return try {
+            val userDao = db.userDao()
+            val user = userDao.getUser(username, password)
+            Result.Success(user.name.toString())
         } catch (e: Throwable) {
-            return Result.Error(IOException("Error logging in", e))
+            Result.Error(IOException("Error logging in", e))
         }
-    }
-
-    fun logout() {
-        // TODO: revoke authentication
     }
 }
