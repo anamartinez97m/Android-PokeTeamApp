@@ -8,7 +8,7 @@ import com.mimo.poketeamapp.data.LoginRepository
 import com.mimo.poketeamapp.data.Result
 
 import com.mimo.poketeamapp.R
-import com.mimo.poketeamapp.data.model.LoggedInUser
+import com.mimo.poketeamapp.model.LoggedInUser
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 

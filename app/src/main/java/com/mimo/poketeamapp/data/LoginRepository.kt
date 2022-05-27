@@ -1,7 +1,6 @@
 package com.mimo.poketeamapp.data
 
-import com.mimo.poketeamapp.data.model.LoggedInUser
-import com.mimo.poketeamapp.database.entity.User
+import com.mimo.poketeamapp.model.LoggedInUser
 
 class LoginRepository(val dataSource: LoginDataSource) {
 

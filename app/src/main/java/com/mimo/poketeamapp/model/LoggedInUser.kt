@@ -1,4 +1,4 @@
-package com.mimo.poketeamapp.data.model
+package com.mimo.poketeamapp.model
 
 data class LoggedInUser(
     val userId: Int

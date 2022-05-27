@@ -1,9 +1,8 @@
 package com.mimo.poketeamapp.data
 
-import com.mimo.poketeamapp.data.model.LoggedInUser
+import com.mimo.poketeamapp.model.LoggedInUser
 import com.mimo.poketeamapp.database.AppDatabase
 import java.io.IOException
-import kotlin.math.log
 
 class LoginDataSource(private val db: AppDatabase) {
 
