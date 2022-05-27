@@ -8,6 +8,7 @@ import com.mimo.poketeamapp.data.LoginRepository
 import com.mimo.poketeamapp.data.Result
 
 import com.mimo.poketeamapp.R
+import com.mimo.poketeamapp.data.model.LoggedInUser
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -17,10 +18,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
+    private val _loggedInUser = MutableLiveData<LoggedInUser>()
+    val loggedInUser: LiveData<LoggedInUser> = _loggedInUser
+
     fun login(username: String, password: String) {
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
+            _loggedInUser.value = LoggedInUser(result.data.userId)
             _loginResult.value = LoginResult(success = R.string.login_correct)
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)

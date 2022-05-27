@@ -11,4 +11,15 @@
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
+
+    <EditText
+        android:id="@+id/param_to_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/write_here"
+        android:inputType="text"
+        android:selectAllOnFocus="true" />
+
 </LinearLayout>

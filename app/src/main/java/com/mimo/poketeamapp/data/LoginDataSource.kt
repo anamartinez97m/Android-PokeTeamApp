@@ -1,17 +1,20 @@
 package com.mimo.poketeamapp.data
 
+import com.mimo.poketeamapp.data.model.LoggedInUser
 import com.mimo.poketeamapp.database.AppDatabase
 import java.io.IOException
+import kotlin.math.log
 
 class LoginDataSource(private val db: AppDatabase) {
 
-    fun login(username: String, password: String): Result<*> {
-        return try {
+    fun login(username: String, password: String): Result<LoggedInUser> {
+        try {
             val userDao = db.userDao()
             val user = userDao.getUser(username, password)
-            Result.Success(user.name.toString())
+            val loggedInUser = LoggedInUser(user.id)
+            return Result.Success(loggedInUser)
         } catch (e: Throwable) {
-            Result.Error(IOException("Error logging in", e))
+            return Result.Error(IOException("Error logging in", e))
         }
     }
 }

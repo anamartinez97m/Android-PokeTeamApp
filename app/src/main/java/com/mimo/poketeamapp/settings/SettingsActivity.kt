@@ -1,11 +1,21 @@
-package com.mimo.poketeamapp
+package com.mimo.poketeamapp.settings
 
+import android.content.Intent
+import androidx.lifecycle.Observer
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import com.mimo.poketeamapp.MainActivity
+import com.mimo.poketeamapp.R
+import com.mimo.poketeamapp.database.AppDatabase
+import com.mimo.poketeamapp.login.LoginViewModel
+import com.mimo.poketeamapp.login.LoginViewModelFactory
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -18,16 +28,25 @@ class SettingsActivity : AppCompatActivity() {
     private var languages: List<String> = ArrayList()
     private var languagesCodesMap: HashMap<String, String> = HashMap()
 
+    private lateinit var loginViewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        val db = Room
+            .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
+            .allowMainThreadQueries()
+            .build()
 
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
         toolbar.setTitle(R.string.title_settings)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        //supportActionBar?.setIcon(R.drawable.ic_baseline_arrow_back_ios_24)
+
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(db))
+            .get(LoginViewModel::class.java)
 
         val expandableListView: ExpandableListView = findViewById(R.id.expandable_list_view)
         addDataToHashMap()
@@ -51,9 +70,17 @@ class SettingsActivity : AppCompatActivity() {
         expandableListView.setOnChildClickListener { parent, v, groupPosition, childPosition, _ ->
             if(groupPosition == 0) {
                 changeLanguage(childPosition)
+            } else if (groupPosition == 1) {
+
             }
             false
         }
+
+        /*loginViewModel.loggedInUser.observe(this@SettingsActivity, Observer {
+            val result = it ?: return@Observer
+
+            Log.d("user", result.toString())
+        })*/
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -48,4 +48,5 @@
     <string name="userAlreadyExists">El usuario ya existe</string>
     <string name="login_correct">Inicio de sesión correcto</string>
     <string name="registration_correct">Registro correcto</string>
+    <string name="write_here">Escribe aquí...</string>
 </resources>

@@ -62,5 +62,6 @@
     <string name="userAlreadyExists">User already exists</string>
     <string name="login_correct">Login correct</string>
     <string name="registration_correct">Registration correct</string>
+    <string name="write_here">Write here...</string>
 
 </resources>
