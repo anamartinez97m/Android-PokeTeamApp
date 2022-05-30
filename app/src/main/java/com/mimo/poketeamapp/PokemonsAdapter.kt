@@ -26,8 +26,8 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
 
         fun bind(pokemon: Pokemon) {
             binding.pokemonName.text = pokemon.name
-            binding.pokemonAbilityPoints.text = pokemon.abilityPoints.toString()
-            Picasso.get().load(pokemon.image).into(binding.pokemonImage)
+            binding.pokemonBaseExperience.text = pokemon.base_experience.toString()
+            Picasso.get().load(pokemon.sprites?.other?.dream_world?.front_default).into(binding.pokemonImage)
         }
     }
 }

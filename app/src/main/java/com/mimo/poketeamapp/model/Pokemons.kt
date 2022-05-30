@@ -2,21 +2,40 @@ package com.mimo.poketeamapp.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Pokemons(@SerializedName("pokemons") val pokemons: Array<Pokemon>) {
+data class Pokemons(
+    val results: Array<Pokemon>
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as Pokemons
 
-        if (!pokemons.contentEquals(other.pokemons)) return false
+        if (!results.contentEquals(other.results)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return pokemons.contentHashCode()
+        return results.contentHashCode()
     }
 }
 
-data class Pokemon(val name: String, val image: String, val abilityPoints: Int)
+data class Pokemon(
+    val name: String,
+    val url: String,
+    val id: String,
+    val sprites: Sprites?,
+    val base_experience: Int)
+
+data class Sprites(
+    val other: OtherSprites
+)
+
+data class OtherSprites(
+    val dream_world: DreamWorldOtherSprite
+)
+
+data class DreamWorldOtherSprite(
+    val front_default: String
+)
