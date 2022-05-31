@@ -21,9 +21,8 @@ class PokeListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_poke_list)
-
         binding = ActivityPokeListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initList()
 
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
@@ -32,7 +31,6 @@ class PokeListActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        //doRequestSinglePokemon()
         doRequest()
     }
 
@@ -47,31 +45,17 @@ class PokeListActivity : AppCompatActivity() {
         binding.recyclerView.adapter = pokemonsAdapter
     }
 
-//    private fun doRequestSinglePokemon() {
-//        val url = "https://pokeapi.co/api/v2/pokemon/eevee"
-//        val gsonRequest = GsonRequest(url,
-//            Pokemon::class.java, null,
-//            { response ->
-//                Log.d("response SinglePokemon", response.toString())
-//                showPokemon(response)
-//            },
-//            {
-//                Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
-//            }
-//        )
-//        RequestManager.getInstance(this).addToRequestQueue(gsonRequest)
-//    }
-
     private fun doRequest() {
-        val pokemonsArray: ArrayList<Pokemon> = ArrayList()
+        var pokemonsArray: List<Pokemon> = ArrayList()
         val url = "https://pokeapi.co/api/v2/pokemon"
         val gsonRequest = GsonRequest(url,
             Pokemons::class.java, null,
             { response ->
                 Log.d("response", response.toString())
-                for(p: Pokemon in response.results) {
-                    pokemonsArray.add(doRequestSearchPokemon(p.url))
+                response.results.iterator().forEach { p ->
+                    pokemonsArray = pokemonsArray + doRequestSearchPokemon(p.url)
                 }
+                Log.d("pokemonsArray", pokemonsArray.toString())
                 showPokemons(pokemonsArray)
             },
             {
@@ -103,9 +87,4 @@ class PokeListActivity : AppCompatActivity() {
         pokemons.addAll(pokemonsResponse)
         pokemonsAdapter.notifyDataSetChanged()
     }
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    private fun showPokemon(pokemonResponse: Pokemon) {
-//        Toast.makeText(this, "Has desbloqueado a ${pokemonResponse.name}!", Toast.LENGTH_SHORT).show()
-//    }
 }

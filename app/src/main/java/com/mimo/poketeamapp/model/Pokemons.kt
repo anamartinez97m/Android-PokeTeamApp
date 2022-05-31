@@ -1,9 +1,10 @@
 package com.mimo.poketeamapp.model
 
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
 data class Pokemons(
-    val results: Array<Pokemon>
+    @SerializedName("results") val results: Array<Pokemon>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

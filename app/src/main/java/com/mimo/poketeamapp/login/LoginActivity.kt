@@ -32,7 +32,11 @@ class LoginActivity : AppCompatActivity() {
         val db = Room
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
+        // TODO: cambiar fallback a manejo de migraciones
+        // TODO: borrar
+        db.pokemonDao().addFavorite("PokemonName","PokemonUrl", "1", "PokemonImage", 10)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
