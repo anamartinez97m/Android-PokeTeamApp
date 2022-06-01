@@ -19,6 +19,9 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
+import com.mimo.poketeamapp.model.HomeOtherSprite
+import com.mimo.poketeamapp.model.OtherSprites
+import com.mimo.poketeamapp.model.Sprites
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,7 +39,10 @@ class LoginActivity : AppCompatActivity() {
             .build()
         // TODO: cambiar fallback a manejo de migraciones
         // TODO: borrar
-        db.pokemonDao().addFavorite("PokemonName","PokemonUrl", "1", "PokemonImage", 10)
+        db.pokemonDao().removeAllFavorites()
+        db.pokemonDao().addFavorite("Eevee","https://pokeapi.co/api/v2/pokemon/133",
+            "133",  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/133.png",
+            65)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -27,16 +27,17 @@ data class Pokemon(
     val url: String,
     val id: String,
     val sprites: Sprites?,
-    val base_experience: Int)
+    val base_experience: Int,
+    val image: String?)
 
 data class Sprites(
     val other: OtherSprites
 )
 
 data class OtherSprites(
-    val dream_world: DreamWorldOtherSprite
+    val home: HomeOtherSprite
 )
 
-data class DreamWorldOtherSprite(
+data class HomeOtherSprite(
     val front_default: String
 )

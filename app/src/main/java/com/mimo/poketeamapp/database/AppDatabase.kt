@@ -7,7 +7,7 @@ import com.mimo.poketeamapp.database.dao.UserDao
 import com.mimo.poketeamapp.database.entity.PokemonEntity
 import com.mimo.poketeamapp.database.entity.User
 
-@Database(entities = [User::class, PokemonEntity::class], version = 2)
+@Database(entities = [User::class, PokemonEntity::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun pokemonDao(): PokemonDao

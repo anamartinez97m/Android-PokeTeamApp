@@ -3,6 +3,7 @@ package com.mimo.poketeamapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mimo.poketeamapp.databinding.PokemonItemBinding
 import com.mimo.poketeamapp.model.Pokemon
@@ -27,7 +28,11 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
         fun bind(pokemon: Pokemon) {
             binding.pokemonName.text = pokemon.name
             binding.pokemonBaseExperience.text = pokemon.base_experience.toString()
-            Picasso.get().load(pokemon.sprites?.other?.dream_world?.front_default).into(binding.pokemonImage)
+            if(pokemon.sprites == null && pokemon.image != null && pokemon.image.isNotEmpty()) {
+                Picasso.get().load(pokemon.image).into(binding.pokemonImage)
+            } else {
+                Picasso.get().load(pokemon.sprites?.other?.home?.front_default).into(binding.pokemonImage)
+            }
         }
     }
 }

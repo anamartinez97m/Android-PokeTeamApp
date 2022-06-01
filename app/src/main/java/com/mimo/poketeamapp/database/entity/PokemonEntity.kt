@@ -10,7 +10,7 @@ data class PokemonEntity(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "url") val url: String,
     @ColumnInfo(name = "api_pokemon_id") val id: String,
-    @ColumnInfo(name = "sprites") val sprites: String,
+    @ColumnInfo(name = "image") val image: String,
     @ColumnInfo(name = "base_experience") val base_experience: Int,
     @ColumnInfo(name = "favorite") val favorite: Boolean
 )

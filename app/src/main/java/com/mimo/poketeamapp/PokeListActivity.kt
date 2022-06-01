@@ -66,7 +66,7 @@ class PokeListActivity : AppCompatActivity() {
     }
 
     private fun doRequestSearchPokemon(searchUrl: String): Pokemon {
-        var pokemonToReturn: Pokemon = Pokemon("","","",null,0)
+        var pokemonToReturn: Pokemon = Pokemon("","","",null,0, "")
         val gsonRequest = GsonRequest(
             searchUrl,
             Pokemon::class.java, null,

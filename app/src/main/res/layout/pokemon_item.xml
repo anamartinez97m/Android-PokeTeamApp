@@ -8,8 +8,7 @@
         android:id="@+id/pokemon_image"
         android:layout_width="84dp"
         android:layout_height="84dp"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="TODO" />
+        android:src="@drawable/ic_round_account_circle_24"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
