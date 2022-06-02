@@ -1,11 +1,14 @@
 package com.mimo.poketeamapp.registration
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -24,6 +27,7 @@ class RegisterUserActivity : AppCompatActivity() {
     private lateinit var registrationViewModel: RegistrationViewModel
     private lateinit var binding: ActivityRegisterUserBinding
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
@@ -126,6 +130,25 @@ class RegisterUserActivity : AppCompatActivity() {
                 }
                 false
             }
+
+            setOnTouchListener { v, event ->
+                val drawableLeft = 0
+                val drawableTop = 1
+                val drawableRight = 2
+                val drawableBottom = 3
+
+                if(event.action == MotionEvent.ACTION_UP) {
+                    if(event.rawX >= (password.right - password.compoundDrawables[drawableRight].bounds.width())) {
+                        if(password.inputType == InputType.TYPE_CLASS_TEXT) {
+                            // TODO: no funciona del todo
+                            password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        } else {
+                            password.inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                    }
+                }
+                false
+            }
         }
 
         repeatedPassword.apply {
@@ -156,6 +179,25 @@ class RegisterUserActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 registrationViewModel.registrate(name.text.toString(), surname.text.toString(),
                     email.text.toString(), password.text.toString())
+            }
+
+            setOnTouchListener { v, event ->
+                val drawableLeft = 0
+                val drawableTop = 1
+                val drawableRight = 2
+                val drawableBottom = 3
+
+                if(event.action == MotionEvent.ACTION_UP) {
+                    if(event.rawX >= (repeatedPassword.right - repeatedPassword.compoundDrawables[drawableRight].bounds.width())) {
+                        if(repeatedPassword.inputType == InputType.TYPE_CLASS_TEXT) {
+                            // TODO: no funciona del todo
+                            repeatedPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        } else {
+                            repeatedPassword.inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                    }
+                }
+                false
             }
         }
     }

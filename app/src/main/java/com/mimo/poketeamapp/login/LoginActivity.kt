@@ -1,11 +1,15 @@
 package com.mimo.poketeamapp.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -19,15 +23,13 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
-import com.mimo.poketeamapp.model.HomeOtherSprite
-import com.mimo.poketeamapp.model.OtherSprites
-import com.mimo.poketeamapp.model.Sprites
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -53,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
         val registerUser = binding.signUp
         val login = binding.login
         val loading = binding.loading
+        val picture = binding.profilePictureLogin
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory(db))
             .get(LoginViewModel::class.java)
@@ -113,6 +116,25 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+            
+            setOnTouchListener { v, event ->
+                val drawableLeft = 0
+                val drawableTop = 1
+                val drawableRight = 2
+                val drawableBottom = 3
+
+                if(event.action == MotionEvent.ACTION_UP) {
+                    if(event.rawX >= (password.right - password.compoundDrawables[drawableRight].bounds.width())) {
+                        if(password.inputType == InputType.TYPE_CLASS_TEXT) {
+                            // TODO: no funciona del todo
+                            password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        } else {
+                            password.inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                    }
+                }
+                false
+            }
         }
 
         forgotPassword.setOnClickListener {
@@ -123,6 +145,10 @@ class LoginActivity : AppCompatActivity() {
         registerUser.setOnClickListener {
             val intent = Intent(this, RegisterUserActivity::class.java)
             startActivity(intent)
+        }
+
+        picture.setOnClickListener {
+            Log.d("imagen", "imageeeeeeen")
         }
     }
 
