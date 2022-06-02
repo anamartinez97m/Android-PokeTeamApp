@@ -49,4 +49,5 @@
     <string name="login_correct">Inicio de sesión correcto</string>
     <string name="registration_correct">Registro correcto</string>
     <string name="write_here">Escribe aquí...</string>
+    <string name="have_no_permissions">Sin permisos no se puede añadir foto de perfil</string>
 </resources>

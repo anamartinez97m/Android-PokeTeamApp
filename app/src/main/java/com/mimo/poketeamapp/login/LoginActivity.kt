@@ -1,7 +1,10 @@
 package com.mimo.poketeamapp.login
 
+import android.Manifest.permission
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +18,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
@@ -148,7 +152,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         picture.setOnClickListener {
-            Log.d("imagen", "imageeeeeeen")
+            if(!checkPermissions()) {
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(permission.CAMERA, permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_PERMISSIONS_REQUEST_CODE)
+            } else {
+                Toast.makeText(this, "Hay permisooooooos", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -156,8 +166,30 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.i(TAG, "onRequestPermissionResult")
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+            when {
+                (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> Toast.makeText(this, "Hay permisooooooos", Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(this, R.string.have_no_permissions, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun checkPermissions(): Boolean =
+        ActivityCompat.checkSelfPermission(
+            this,
+            permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    companion object {
+        const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
+        const val TAG = "GetAccessToGallery"
     }
 }
 
