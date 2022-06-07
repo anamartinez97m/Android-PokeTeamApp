@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -27,6 +29,7 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
+import com.squareup.picasso.Picasso
 
 class LoginActivity : AppCompatActivity() {
 
@@ -157,7 +160,16 @@ class LoginActivity : AppCompatActivity() {
                     this, arrayOf(permission.CAMERA, permission.READ_EXTERNAL_STORAGE),
                     REQUEST_PERMISSIONS_REQUEST_CODE)
             } else {
-                Toast.makeText(this, "Hay permisooooooos", Toast.LENGTH_SHORT).show()
+                val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI).also { pictureIntent ->
+                    pictureIntent.resolveActivity(packageManager)?.also {
+                        startActivityForResult(pictureIntent, PICK_IMAGE_REQUEST)
+                    }
+                }
+                /*val camera = Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+                    pictureIntent.resolveActivity(packageManager)?.also {
+                        startActivityForResult(pictureIntent, CAPTURE_IMAGE_REQUEST)
+                    }
+                }*/
             }
         }
     }
@@ -166,12 +178,32 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            PICK_IMAGE_REQUEST -> {
+                if(resultCode == RESULT_OK && data != null && data.data != null) {
+                    val image = data.data as Uri
+                    Picasso.get().load(image).into(binding.profilePictureLogin)
+                }
+            }
+            CAPTURE_IMAGE_REQUEST -> {
+                if(resultCode == RESULT_OK) {
+                    //val image = data.data as Uri
+                    //Picasso.get().load(image).into(binding.profilePictureLogin)
+                }
+            }
+        }
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.i(TAG, "onRequestPermissionResult")
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             when {
-                (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> Toast.makeText(this, "Hay permisooooooos", Toast.LENGTH_SHORT).show()
+                (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED) -> RESULT_OK
                 else -> Toast.makeText(this, R.string.have_no_permissions, Toast.LENGTH_SHORT).show()
             }
         }
@@ -184,12 +216,18 @@ class LoginActivity : AppCompatActivity() {
     private fun checkPermissions(): Boolean =
         ActivityCompat.checkSelfPermission(
             this,
-            permission.ACCESS_COARSE_LOCATION
+            permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED &&
+        ActivityCompat.checkSelfPermission(
+            this,
+            permission.READ_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
 
     companion object {
-        const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
         const val TAG = "GetAccessToGallery"
+        const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
+        const val PICK_IMAGE_REQUEST = 2
+        const val CAPTURE_IMAGE_REQUEST = 3
     }
 }
 

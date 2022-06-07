@@ -62,7 +62,7 @@
     <string name="userAlreadyExists">User already exists</string>
     <string name="login_correct">Login correct</string>
     <string name="registration_correct">Registration correct</string>
-    <string name="write_here">Write here...</string>
+    <string name="write_here">Allow permissions to set profile picture</string>
     <string name="have_no_permissions">Profile picture can\'t be added without permissions</string>
 
 </resources>
