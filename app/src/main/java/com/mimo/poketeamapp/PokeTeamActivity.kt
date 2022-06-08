@@ -3,12 +3,12 @@ package com.mimo.poketeamapp
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.database.entity.PokemonEntity
-import com.mimo.poketeamapp.databinding.ActivityPokeListBinding
 import com.mimo.poketeamapp.databinding.ActivityPokeTeamBinding
 import com.mimo.poketeamapp.model.Pokemon
 

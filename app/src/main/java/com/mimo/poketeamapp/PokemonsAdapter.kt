@@ -3,7 +3,6 @@ package com.mimo.poketeamapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mimo.poketeamapp.databinding.PokemonItemBinding
 import com.mimo.poketeamapp.model.Pokemon
@@ -17,15 +16,20 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PokemonViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false), parent
     )
 
     override fun getItemCount() = pokemons.size
 
-    class PokemonViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class PokemonViewHolder(view: View, private val parent: ViewGroup): RecyclerView.ViewHolder(view) {
         private val binding = PokemonItemBinding.bind(view)
 
         fun bind(pokemon: Pokemon) {
+            if(parent.context is PokeTeamActivity) {
+                binding.add.visibility = View.GONE
+            } else {
+                binding.remove.visibility = View.GONE
+            }
             binding.pokemonName.text = pokemon.name
             binding.pokemonBaseExperience.text = pokemon.base_experience.toString()
             if(pokemon.sprites == null && pokemon.image != null && pokemon.image.isNotEmpty()) {

@@ -165,11 +165,6 @@ class LoginActivity : AppCompatActivity() {
                         startActivityForResult(pictureIntent, PICK_IMAGE_REQUEST)
                     }
                 }
-                /*val camera = Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
-                    pictureIntent.resolveActivity(packageManager)?.also {
-                        startActivityForResult(pictureIntent, CAPTURE_IMAGE_REQUEST)
-                    }
-                }*/
             }
         }
     }
@@ -179,8 +174,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICK_IMAGE_REQUEST -> {
                 if(resultCode == RESULT_OK && data != null && data.data != null) {

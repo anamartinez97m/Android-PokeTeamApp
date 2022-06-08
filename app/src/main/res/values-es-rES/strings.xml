@@ -50,4 +50,6 @@
     <string name="registration_correct">Registro correcto</string>
     <string name="write_here">Escribe aquí...</string>
     <string name="have_no_permissions">Aceptar los permisos para añadir foto de perfil</string>
+    <string name="remove">Eliminar</string>
+    <string name="add">Añadir</string>
 </resources>

@@ -64,5 +64,7 @@
     <string name="registration_correct">Registration correct</string>
     <string name="write_here">Allow permissions to set profile picture</string>
     <string name="have_no_permissions">Profile picture can\'t be added without permissions</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add</string>
 
 </resources>
