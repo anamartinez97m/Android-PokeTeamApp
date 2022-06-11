@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -23,6 +24,8 @@ import com.mimo.poketeamapp.settings.SettingsActivity
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var count = 1126
+    private lateinit var pokemonView: PokemonView
+    private lateinit var textViewError404: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +45,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
         val swipeRefresh: SwipeRefreshLayout = findViewById(R.id.swipe_refresh)
-        val textViewSwipeRefresh: TextView = findViewById(R.id.textViewSwipeRefresh)
+        val textViewSwipeRefresh: TextView = findViewById(R.id.textview_swipe_refresh)
+
+        pokemonView = findViewById(R.id.pokemon_view)
+        textViewError404 = findViewById(R.id.textview_error_404)
+        textViewError404.visibility = View.GONE
 
         // TODO: Change for placeholders
         val randomCount = rand(count)
-        textViewSwipeRefresh.text = "Número random entre [1 y " + count + "]: " + randomCount
+        textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount"
         doRequest(randomCount)
         swipeRefresh.setOnRefreshListener {
-            textViewSwipeRefresh.text = "Número random entre [1 y " + count + "]: " + randomCount
-            doRequest(randomCount)
+            val randomCount2 = rand(count)
+            textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount2"
+            doRequest(randomCount2)
             swipeRefresh.isRefreshing = false
         }
     }
@@ -118,9 +126,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val gsonRequest = GsonRequest(url,
             Pokemon::class.java, null,
             { response ->
-                response.species?.let { Log.d("response", it.name) }
+                pokemonView.visibility = View.VISIBLE
+                textViewError404.visibility = View.GONE
+                Log.d("response name", response.name)
+                Log.d("response base experience", response.base_experience.toString())
+                Log.d("response types", response.types.contentToString())
             },
             {
+                pokemonView.visibility = View.GONE
+                textViewError404.visibility = View.VISIBLE
+                textViewError404.text = "Pokemon no encontrado. \nPor favor, recargue de nuevo la página."
                 Log.d("requestError", "Pokemon no encontrado. Por favor, recargue de nuevo la página.")
             }
         )

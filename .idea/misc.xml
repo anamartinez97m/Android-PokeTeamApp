@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3536458333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_poke_list.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/layout/activity_poke_team.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/activity_register_user.xml" value="0.35520833333333335" />
@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/list_item_user_data.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.35733695652173914" />
         <entry key="app/src/main/res/layout/pokemon_item.xml" value="0.3411458333333333" />
+        <entry key="app/src/main/res/layout/pokemon_view.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/selected_dot.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.32114467408585057" />
         <entry key="app/src/main/res/layout/tab_selector.xml" value="0.35520833333333335" />

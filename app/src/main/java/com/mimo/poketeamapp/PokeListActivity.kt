@@ -46,17 +46,14 @@ class PokeListActivity : AppCompatActivity() {
     }
 
     private fun doRequest() {
-        var pokemonsArray: List<Pokemon> = ArrayList()
         val url = "https://pokeapi.co/api/v2/pokemon"
         val gsonRequest = GsonRequest(url,
             Pokemons::class.java, null,
             { response ->
                 Log.d("response", response.toString())
                 response.results.iterator().forEach { p ->
-                    pokemonsArray = pokemonsArray + doRequestSearchPokemon(p.url)
+                    doRequestSearchPokemon(p.url)
                 }
-                Log.d("pokemonsArray", pokemonsArray.toString())
-                showPokemons(pokemonsArray)
             },
             {
                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
@@ -65,26 +62,23 @@ class PokeListActivity : AppCompatActivity() {
         RequestManager.getInstance(this).addToRequestQueue(gsonRequest)
     }
 
-    private fun doRequestSearchPokemon(searchUrl: String): Pokemon {
-        var pokemonToReturn: Pokemon = Pokemon("","","",null, null,0, "")
+    private fun doRequestSearchPokemon(searchUrl: String) {
         val gsonRequest = GsonRequest(
             searchUrl,
             Pokemon::class.java, null,
             { response ->
-                pokemonToReturn = response
+                concatPokemon(response)
             },
             {
                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
             }
         )
         RequestManager.getInstance(this).addToRequestQueue(gsonRequest)
-        return pokemonToReturn
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun showPokemons(pokemonsResponse: List<Pokemon>) {
-        pokemons.clear()
-        pokemons.addAll(pokemonsResponse)
+    private fun concatPokemon(pokemonResponse: Pokemon) {
+        pokemons.add(pokemonResponse)
         pokemonsAdapter.notifyDataSetChanged()
     }
 }
