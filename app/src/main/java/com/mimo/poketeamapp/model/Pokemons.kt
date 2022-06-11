@@ -4,6 +4,7 @@ import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
 data class Pokemons(
+    val count: Int?,
     @SerializedName("results") val results: Array<Pokemon>
 ) {
     override fun equals(other: Any?): Boolean {
@@ -26,9 +27,14 @@ data class Pokemon(
     val name: String,
     val url: String,
     val id: String,
+    val species: Species?,
     val sprites: Sprites?,
     val base_experience: Int,
     val image: String?)
+
+data class Species(
+    val name: String
+)
 
 data class Sprites(
     val other: OtherSprites

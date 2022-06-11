@@ -1,9 +1,12 @@
 package com.mimo.poketeamapp
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.PokemonItemBinding
 import com.mimo.poketeamapp.model.Pokemon
 import com.squareup.picasso.Picasso
@@ -23,6 +26,11 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
 
     class PokemonViewHolder(view: View, private val parent: ViewGroup): RecyclerView.ViewHolder(view) {
         private val binding = PokemonItemBinding.bind(view)
+        val db = Room
+            .databaseBuilder(parent.context, AppDatabase::class.java, "pokemon-database")
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
 
         fun bind(pokemon: Pokemon) {
             if(parent.context is PokeTeamActivity) {
@@ -36,6 +44,11 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
                 Picasso.get().load(pokemon.image).into(binding.pokemonImage)
             } else {
                 Picasso.get().load(pokemon.sprites?.other?.home?.front_default).into(binding.pokemonImage)
+            }
+
+            binding.remove.setOnClickListener {
+                db.pokemonDao().removeFavorite(pokemon.id)
+                // TODO lograr notifydatasetchanged
             }
         }
     }

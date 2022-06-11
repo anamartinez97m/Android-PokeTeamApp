@@ -31,7 +31,7 @@ class PokeTeamActivity : AppCompatActivity() {
         val pokemonsDB: List<PokemonEntity> = db.pokemonDao().getFavorites()
         var pokemonsToShow: List<Pokemon> = ArrayList()
         pokemonsDB.iterator().forEach { p ->
-            val pokemon = Pokemon(p.name, p.url, p.id, null, p.base_experience, p.image)
+            val pokemon = Pokemon(p.name, p.url, p.id, null, null, p.base_experience, p.image)
             pokemonsToShow = pokemonsToShow + pokemon
         }
 

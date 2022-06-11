@@ -14,6 +14,9 @@ interface PokemonDao {
             " VALUES (:name, :url, :api_pokemon_id, :image, :base_experience, 1) ")
     fun addFavorite(name: String, url: String, api_pokemon_id: String, image: String, base_experience: Int)
 
-    @Query("DELETE FROM PokemonEntity")
+    @Query("UPDATE PokemonEntity SET favorite = 0 WHERE db_id > 0")
     fun removeAllFavorites()
+
+    @Query("UPDATE PokemonEntity SET favorite = 0 WHERE api_pokemon_id = :api_pokemon_id")
+    fun removeFavorite(api_pokemon_id: String)
 }

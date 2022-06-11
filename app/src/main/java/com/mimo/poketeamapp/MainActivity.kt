@@ -3,16 +3,26 @@ package com.mimo.poketeamapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.navigation.NavigationView
+import com.mimo.poketeamapp.model.Pokemon
+import com.mimo.poketeamapp.model.Pokemons
+import com.mimo.poketeamapp.network.GsonRequest
+import com.mimo.poketeamapp.network.RequestManager
 import com.mimo.poketeamapp.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var count = 1126
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +40,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navigationView: NavigationView = findViewById(R.id.navigation_view)
         navigationView.setNavigationItemSelectedListener(this)
+
+        val swipeRefresh: SwipeRefreshLayout = findViewById(R.id.swipe_refresh)
+        val textViewSwipeRefresh: TextView = findViewById(R.id.textViewSwipeRefresh)
+
+        // TODO: Change for placeholders
+        val randomCount = rand(count)
+        textViewSwipeRefresh.text = "Número random entre [1 y " + count + "]: " + randomCount
+        doRequest(randomCount)
+        swipeRefresh.setOnRefreshListener {
+            textViewSwipeRefresh.text = "Número random entre [1 y " + count + "]: " + randomCount
+            doRequest(randomCount)
+            swipeRefresh.isRefreshing = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -88,5 +111,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         else -> {
             true
         }
+    }
+
+    private fun doRequest(id: Int) {
+        val url = "https://pokeapi.co/api/v2/pokemon/$id"
+        val gsonRequest = GsonRequest(url,
+            Pokemon::class.java, null,
+            { response ->
+                response.species?.let { Log.d("response", it.name) }
+            },
+            {
+                Log.d("requestError", "Pokemon no encontrado. Por favor, recargue de nuevo la página.")
+            }
+        )
+        RequestManager.getInstance(this).addToRequestQueue(gsonRequest)
+    }
+
+    private fun rand(end: Int): Int {
+        val start = 1
+        require(start <= end) { "Illegal Argument" }
+        return (Math.random() * (end - start + 1)).toInt() + start
     }
 }
