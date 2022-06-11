@@ -26,7 +26,7 @@ data class Pokemons(
 
 data class Pokemon(
     val name: String,
-    val url: String,
+    val url: String?,
     val id: String,
     val sprites: Sprites?,
     val base_experience: Int,

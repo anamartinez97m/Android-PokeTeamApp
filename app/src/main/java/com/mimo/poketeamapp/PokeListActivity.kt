@@ -50,9 +50,8 @@ class PokeListActivity : AppCompatActivity() {
         val gsonRequest = GsonRequest(url,
             Pokemons::class.java, null,
             { response ->
-                Log.d("response", response.toString())
                 response.results.iterator().forEach { p ->
-                    doRequestSearchPokemon(p.url)
+                    p.url?.let { doRequestSearchPokemon(it) }
                 }
             },
             {

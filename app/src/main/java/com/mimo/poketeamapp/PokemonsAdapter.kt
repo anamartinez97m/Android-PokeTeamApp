@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.mimo.poketeamapp.database.AppDatabase
@@ -49,6 +50,25 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
             binding.remove.setOnClickListener {
                 db.pokemonDao().removeFavorite(pokemon.id)
                 // TODO lograr notifydatasetchanged
+            }
+
+            binding.add.setOnClickListener {
+                if (pokemon.url != null) {
+                    db.pokemonDao().addFavorite(
+                        pokemon.name,
+                        pokemon.url,
+                        pokemon.id,
+                        pokemon.sprites?.other?.home?.front_default!!,
+                        pokemon.base_experience)
+                } else {
+                    db.pokemonDao().addFavorite(
+                        pokemon.name,
+                        "",
+                        pokemon.id,
+                        pokemon.sprites?.other?.home?.front_default!!,
+                        pokemon.base_experience)
+                }
+                Toast.makeText(parent.context, "Added to favorites!", Toast.LENGTH_SHORT).show()
             }
         }
     }
