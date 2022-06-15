@@ -47,11 +47,6 @@ class LoginActivity : AppCompatActivity() {
             .fallbackToDestructiveMigration()
             .build()
         // TODO: cambiar fallback a manejo de migraciones
-        // TODO: borrar
-        db.pokemonDao().removeAllFavorites()
-        db.pokemonDao().addFavorite("Eevee","https://pokeapi.co/api/v2/pokemon/133",
-            "133",  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/133.png",
-            65)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

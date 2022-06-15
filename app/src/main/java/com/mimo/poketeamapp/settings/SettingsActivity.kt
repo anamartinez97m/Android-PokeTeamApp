@@ -29,12 +29,13 @@ class SettingsActivity : AppCompatActivity() {
     private var languagesCodesMap: HashMap<String, String> = HashMap()
 
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val db = Room
+        db = Room
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
             .allowMainThreadQueries()
             .build()
@@ -71,7 +72,7 @@ class SettingsActivity : AppCompatActivity() {
             if(groupPosition == 0) {
                 changeLanguage(childPosition)
             } else if (groupPosition == 1) {
-
+                modifyUserData(childPosition)
             }
             false
         }
@@ -114,6 +115,14 @@ class SettingsActivity : AppCompatActivity() {
         conf.setLocale(locale)
         createConfigurationContext(conf)
         //this.setContentView(R.layout.activity_settings)
+    }
+
+    private fun modifyUserData(childPosition: Int) {
+        when (childPosition) {
+            0 -> Log.d("modifyUserData", "email")
+            1 -> Log.d("modifyUserData", "password")
+            //2 -> Log.d("modifyUserData", "image")
+        }
     }
 
 }

@@ -45,7 +45,7 @@
     <string name="app_mimo" translatable="false">Máster Universitario Informática Móvil</string>
     <string name="app_university" translatable="false">Universidad Pontificia de Salamanca</string>
     <string name="app_api_text">This product uses the PokeAPI API.</string>
-    <string name="app_api_link" translatable="false">https://pokeapi.co/</string>
+    <string name="app_api_link" translatable="false"><a href="https://pokeapi.co/">https://pokeapi.co/</a></string>
     <string name="title_tutorial">Tutorial</string>
     <string name="skip">Skip</string>
     <string name="title_forgot_password">New Password</string>

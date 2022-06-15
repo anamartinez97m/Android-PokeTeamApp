@@ -2,6 +2,8 @@ package com.mimo.poketeamapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 
 class AboutActivity : AppCompatActivity() {
@@ -14,6 +16,9 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        val aboutApiLink: TextView = findViewById(R.id.about_api_link)
+        aboutApiLink.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun onSupportNavigateUp(): Boolean {
