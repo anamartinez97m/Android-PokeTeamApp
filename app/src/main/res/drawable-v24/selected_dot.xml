@@ -5,5 +5,5 @@
     android:thickness="5dp"
     android:useLevel="false"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/purple_200"/>
+    <solid android:color="@color/md_purple_200"/>
 </shape>

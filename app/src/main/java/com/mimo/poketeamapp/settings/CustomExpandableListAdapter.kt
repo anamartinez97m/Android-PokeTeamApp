@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.mimo.poketeamapp.R
 
@@ -16,7 +17,8 @@ class CustomExpandableListAdapter(
 
     private val childTypeLanguage = 0
     private val childTypeUserData = 1
-    private val childTypeUndefined = 2
+    private val childTypeProfilePicture = 2
+    private val childTypeUndefined = 3
 
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
         return this.expandableListDetail[this.expandableListTitle[listPosition]]
@@ -38,17 +40,21 @@ class CustomExpandableListAdapter(
             when (childType) {
                 0 -> convertViewVar = layoutInflater.inflate(R.layout.list_item_language, null)
                 1 -> convertViewVar = layoutInflater.inflate(R.layout.list_item_user_data, null)
+                2 -> convertViewVar = layoutInflater.inflate(R.layout.list_item_profile_picture, null)
             }
         }
 
         when (childType) {
             0 -> {
-                val expandedListTextView = convertViewVar?.findViewById(R.id.expanded_list_item) as TextView
+                val expandedListTextView = convertViewVar?.findViewById(R.id.expanded_language_list_item) as TextView
                 expandedListTextView.text = expandedListText
             }
             1 -> {
-                val expandedListTextView = convertViewVar?.findViewById(R.id.expanded_list_item) as TextView
+                val expandedListTextView = convertViewVar?.findViewById(R.id.expanded_user_data_list_item) as TextView
                 expandedListTextView.text = expandedListText
+            }
+            2 -> {
+                val expandedListImageView = convertViewVar?.findViewById(R.id.profile_picture_settings) as ImageView
             }
         }
 
@@ -101,6 +107,7 @@ class CustomExpandableListAdapter(
         return when (groupPosition) {
             0 -> childTypeLanguage
             1 -> childTypeUserData
+            2 -> childTypeProfilePicture
             else -> childTypeUndefined
         }
     }

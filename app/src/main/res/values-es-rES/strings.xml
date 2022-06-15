@@ -52,4 +52,5 @@
     <string name="have_no_permissions">Aceptar los permisos para añadir foto de perfil</string>
     <string name="remove">Eliminar</string>
     <string name="add">Añadir</string>
+    <string name="modify_profile_picture">Elegir foto de perfil</string>
 </resources>

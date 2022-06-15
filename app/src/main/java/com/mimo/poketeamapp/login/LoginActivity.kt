@@ -152,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
         picture.setOnClickListener {
             if(!checkPermissions()) {
                 ActivityCompat.requestPermissions(
-                    this, arrayOf(permission.CAMERA, permission.READ_EXTERNAL_STORAGE),
+                    this, arrayOf(permission.READ_EXTERNAL_STORAGE),
                     REQUEST_PERMISSIONS_REQUEST_CODE)
             } else {
                 val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI).also { pictureIntent ->
@@ -178,12 +178,6 @@ class LoginActivity : AppCompatActivity() {
                     Picasso.get().load(image).into(binding.profilePictureLogin)
                 }
             }
-            CAPTURE_IMAGE_REQUEST -> {
-                if(resultCode == RESULT_OK) {
-                    //val image = data.data as Uri
-                    //Picasso.get().load(image).into(binding.profilePictureLogin)
-                }
-            }
         }
     }
 
@@ -206,10 +200,6 @@ class LoginActivity : AppCompatActivity() {
     private fun checkPermissions(): Boolean =
         ActivityCompat.checkSelfPermission(
             this,
-            permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED &&
-        ActivityCompat.checkSelfPermission(
-            this,
             permission.READ_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
 
@@ -217,13 +207,9 @@ class LoginActivity : AppCompatActivity() {
         const val TAG = "GetAccessToGallery"
         const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
         const val PICK_IMAGE_REQUEST = 2
-        const val CAPTURE_IMAGE_REQUEST = 3
     }
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
