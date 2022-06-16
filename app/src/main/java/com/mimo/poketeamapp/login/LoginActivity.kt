@@ -2,12 +2,9 @@ package com.mimo.poketeamapp.login
 
 import android.Manifest.permission
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.lifecycle.Observer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -20,15 +17,17 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
-import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
+import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
+import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.squareup.picasso.Picasso
 
 class LoginActivity : AppCompatActivity() {
@@ -84,6 +83,8 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("username", username.toString())
+                intent.putExtra("password", password.toString())
                 startActivity(intent)
             }
         })
@@ -120,16 +121,12 @@ class LoginActivity : AppCompatActivity() {
             }
             
             setOnTouchListener { v, event ->
-                val drawableLeft = 0
-                val drawableTop = 1
                 val drawableRight = 2
-                val drawableBottom = 3
 
                 if(event.action == MotionEvent.ACTION_UP) {
                     if(event.rawX >= (password.right - password.compoundDrawables[drawableRight].bounds.width())) {
-                        if(password.inputType == InputType.TYPE_CLASS_TEXT) {
-                            // TODO: no funciona del todo
-                            password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        if(password.inputType.toString() == InputType.TYPE_CLASS_TEXT.toString()) {
+                            password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                         } else {
                             password.inputType = InputType.TYPE_CLASS_TEXT
                         }
@@ -186,8 +183,7 @@ class LoginActivity : AppCompatActivity() {
         Log.i(TAG, "onRequestPermissionResult")
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             when {
-                (grantResults[0] == PackageManager.PERMISSION_GRANTED
-                && grantResults[1] == PackageManager.PERMISSION_GRANTED) -> RESULT_OK
+                (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> RESULT_OK
                 else -> Toast.makeText(this, R.string.have_no_permissions, Toast.LENGTH_SHORT).show()
             }
         }

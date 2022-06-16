@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -26,6 +22,7 @@
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
             android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawableTint="@color/md_purple_400"
             android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +40,7 @@
             android:selectAllOnFocus="true"
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawableEnd="@drawable/ic_twotone_remove_red_eye_24"
+            android:drawableTint="@color/md_purple_400"
             android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
+            android:theme="@style/loginStylesLight"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.947"
@@ -69,6 +69,8 @@
             android:layout_marginBottom="64dp"
             android:enabled="false"
             android:text="@string/action_sign_in_short"
+            android:theme="@style/loginStylesLight"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/still_not_connected"
+                android:theme="@style/loginStylesLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.335"
@@ -105,6 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/sign_up"
+                android:theme="@style/loginStylesLight"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.567"
@@ -133,6 +138,7 @@
             android:layout_height="124dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_round_account_circle_24"
+            android:theme="@style/loginStylesLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintLeft_toLeftOf="parent"

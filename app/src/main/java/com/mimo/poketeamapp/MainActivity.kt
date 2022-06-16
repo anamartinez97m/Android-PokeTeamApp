@@ -61,6 +61,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             doRequest(randomCount2)
             swipeRefresh.isRefreshing = false
         }
+
+        val intent: Intent = intent
+        val username: String? = intent.getStringExtra("username")
+        if (username != null) {
+            Log.d("intent", username)
+        }
+        Log.d("intent", intent.getStringExtra("password").toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
