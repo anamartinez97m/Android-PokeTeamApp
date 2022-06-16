@@ -150,18 +150,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
             }
 
             setOnTouchListener { v, event ->
-                val drawableLeft = 0
-                val drawableTop = 1
                 val drawableRight = 2
-                val drawableBottom = 3
 
                 if(event.action == MotionEvent.ACTION_UP) {
                     if(event.rawX >= (repeatedPassword.right - repeatedPassword.compoundDrawables[drawableRight].bounds.width())) {
-                        if(repeatedPassword.inputType == InputType.TYPE_CLASS_TEXT) {
-                            // TODO: no funciona del todo
-                            repeatedPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        if(password.inputType.toString() == InputType.TYPE_CLASS_TEXT.toString()) {
+                            password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                         } else {
-                            repeatedPassword.inputType = InputType.TYPE_CLASS_TEXT
+                            password.inputType = InputType.TYPE_CLASS_TEXT
                         }
                     }
                 }
