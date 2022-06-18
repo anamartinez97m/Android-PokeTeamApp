@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -89,6 +90,8 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+        Picasso.get().load(R.drawable.pokemon_logo).into(binding.profilePictureLogin)
+
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
                 username.text.toString(),
@@ -145,64 +148,14 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterUserActivity::class.java)
             startActivity(intent)
         }
-
-        picture.setOnClickListener {
-            if(!checkPermissions()) {
-                ActivityCompat.requestPermissions(
-                    this, arrayOf(permission.READ_EXTERNAL_STORAGE),
-                    REQUEST_PERMISSIONS_REQUEST_CODE)
-            } else {
-                val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI).also { pictureIntent ->
-                    pictureIntent.resolveActivity(packageManager)?.also {
-                        startActivityForResult(pictureIntent, PICK_IMAGE_REQUEST)
-                    }
-                }
-            }
-        }
     }
 
     override fun onBackPressed() {
         finish()
     }
 
-
-    @SuppressLint("MissingSuperCall")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            PICK_IMAGE_REQUEST -> {
-                if(resultCode == RESULT_OK && data != null && data.data != null) {
-                    val image = data.data as Uri
-                    Picasso.get().load(image).into(binding.profilePictureLogin)
-                }
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.i(TAG, "onRequestPermissionResult")
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            when {
-                (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> RESULT_OK
-                else -> Toast.makeText(this, R.string.have_no_permissions, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun checkPermissions(): Boolean =
-        ActivityCompat.checkSelfPermission(
-            this,
-            permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-
-    companion object {
-        const val TAG = "GetAccessToGallery"
-        const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
-        const val PICK_IMAGE_REQUEST = 2
     }
 }
 

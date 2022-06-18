@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="grey">#ACACAC</color>
+    <color name="button_start_gradient">@color/md_purple_300</color>
+    <color name="button_end_gradient">@color/md_purple_900</color>
 
     <array name="purples">
         <item>@color/md_purple_500</item>
