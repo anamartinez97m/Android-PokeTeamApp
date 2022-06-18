@@ -11,6 +11,19 @@
         <item name="android:tint">@color/md_purple_500_75</item>
     </style>
 
+    <style name="settingsStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColor">@color/md_purple_900</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:tint">@color/md_purple_500_75</item>
+    </style>
+
+    <style name="settingsTitlesStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColor">@color/md_purple_900</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:tint">@color/md_purple_500_75</item>
+    </style>
+
     <style name="editTextStyles" parent="Theme.MaterialComponents.Light">
         <item name="android:drawableTint">@color/md_purple_400</item>
         <item name="android:drawablePadding">10dp</item>

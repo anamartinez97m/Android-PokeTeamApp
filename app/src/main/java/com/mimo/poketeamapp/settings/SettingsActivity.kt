@@ -1,8 +1,10 @@
 package com.mimo.poketeamapp.settings
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,11 +18,14 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivitySettingsBinding
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var db: AppDatabase
+    private lateinit var context: Context
+    private lateinit var res: Resources
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,23 +47,28 @@ class SettingsActivity : AppCompatActivity() {
         binding.profilePictureSettings.setOnClickListener {
             modifyProfilePicture()
         }
+
+        binding.checkBoxLanguageEn.isChecked = Locale.getDefault().toString() == "en_US"
+        binding.checkBoxLanguageEs.isChecked = Locale.getDefault().toString() == "es_ES"
+
+        binding.checkBoxLanguageEn.setOnClickListener{
+            binding.checkBoxLanguageEs.isChecked = false
+            val localeHelper = LocaleHelper()
+            context = localeHelper.setLocale(this, "en")
+            res = context.resources
+        }
+
+        binding.checkBoxLanguageEs.setOnClickListener{
+            binding.checkBoxLanguageEn.isChecked = false
+            val localeHelper: LocaleHelper = LocaleHelper()
+            context = localeHelper.setLocale(this, "es")
+            res = context.resources
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
-    }
-
-    private fun changeLanguage(languagePosition: Int) {
-        // TODO: terminar
-        //val currentLocale = this.resources.configuration.locales[0]
-        //val langCode = languagesCodesMap[languages[languagePosition]]
-        //val conf: Configuration = this.resources.configuration
-        //val locale = Locale(langCode)
-        //Locale.setDefault(locale)
-        //conf.setLocale(locale)
-        //createConfigurationContext(conf)
-        //this.setContentView(R.layout.activity_settings)
     }
 
     private fun modifyProfilePicture() {

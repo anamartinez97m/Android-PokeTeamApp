@@ -21,6 +21,7 @@
 
     <TextView
         android:id="@+id/language_title"
+        style="@style/settingsTitlesStylesLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/change_language"
@@ -33,10 +34,10 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_language_en"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
+        android:text="@string/en_US"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.063"
@@ -44,8 +45,21 @@
         app:layout_constraintTop_toBottomOf="@+id/language_title"
         app:layout_constraintVertical_bias="0.027" />
 
+    <CheckBox
+        android:id="@+id/checkBox_language_es"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/es_ES"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_language_en"
+        app:layout_constraintVertical_bias="0.027" />
+
     <TextView
         android:id="@+id/modify_user_title"
+        style="@style/settingsTitlesStylesLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -54,13 +68,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_language_es"
         app:layout_constraintVertical_bias="0.026" />
 
     <EditText
         android:id="@+id/modify_user_email"
+        style="@style/editTextStyles"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="@string/write_here"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -74,8 +89,9 @@
 
     <EditText
         android:id="@+id/modify_user_password"
+        style="@style/editTextStyles"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="@string/write_here"
         android:inputType="textVisiblePassword"
         android:layout_marginStart="20dp"
@@ -89,6 +105,7 @@
 
     <ImageView
         android:id="@+id/profile_picture_settings"
+        style="@style/settingsStylesLight"
         android:layout_width="124dp"
         android:layout_height="124dp"
         android:src="@drawable/ic_round_account_circle_24"
@@ -101,8 +118,9 @@
 
     <Button
         android:id="@+id/save_changes"
+        style="@style/buttonSaveStyles"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="@string/save"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
