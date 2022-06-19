@@ -22,16 +22,50 @@ android {
         dataBinding true
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile file('intermediate.jks')
+            storePassword "intermediate"
+            keyAlias "intermediate"
+            keyPassword "intermediate"
+        }
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile file('production.jks')
+            storePassword "production"
+            keyAlias 'final'
+            keyPassword "production"
         }
     }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        free {
+            dimension "environment"
+        }
+
+        paid {
+            dimension "environment"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }

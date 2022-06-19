@@ -28,6 +28,7 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
+import com.mimo.poketeamapp.greeting
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.squareup.picasso.Picasso
 
@@ -40,6 +41,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        Log.d("flavor", greeting)
 
         val db = Room
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
