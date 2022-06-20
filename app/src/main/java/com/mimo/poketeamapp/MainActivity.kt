@@ -27,12 +27,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var pokemonView: PokemonView
     private lateinit var textViewError404: TextView
 
+    private lateinit var username: String
+    private lateinit var password: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val toolbar: Toolbar = findViewById(R.id.my_toolbar)
-        toolbar.title = "PokeTeam App"
+        toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -63,11 +66,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val intent: Intent = intent
-        val username: String? = intent.getStringExtra("username")
-        if (username != null) {
-            Log.d("intent", username)
-        }
-        Log.d("intent", intent.getStringExtra("password").toString())
+        username = intent.getStringExtra("username").toString()
+        password = intent.getStringExtra("password").toString()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -88,6 +88,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.menu_settings -> {
             // User chose the "Settings" item, show the app settings UI...
             val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("username", username)
+            intent.putExtra("password", password)
             startActivity(intent)
             true
         }

@@ -79,13 +79,13 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("username", username.toString())
-                intent.putExtra("password", password.toString())
+                intent.putExtra("username", username.text.toString())
+                intent.putExtra("password", password.text.toString())
                 startActivity(intent)
             }
         })
 
-        Picasso.get().load(R.drawable.pokemon_logo).into(binding.profilePictureLogin)
+        Picasso.get().load(R.drawable.pokemon_logo).into(picture)
 
         username.afterTextChanged {
             loginViewModel.loginDataChanged(

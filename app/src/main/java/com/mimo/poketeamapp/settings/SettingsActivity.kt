@@ -30,6 +30,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
     private lateinit var context: Context
     private lateinit var res: Resources
+    private var idUserToModify: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,21 @@ class SettingsActivity : AppCompatActivity() {
             val localeHelper = LocaleHelper()
             context = localeHelper.setLocale(this, "es_ES")
             res = context.resources
+        }
+
+        val intent: Intent = intent
+        val username = intent.getStringExtra("username")
+        val password = intent.getStringExtra("password")
+        binding.modifyUserEmail.setText(username.toString())
+        binding.modifyUserPassword.setText(password.toString())
+
+        if (username != null && password != null) {
+            val user = db.userDao().getUser(username, password)
+            idUserToModify = user.id
+        }
+
+        binding.saveChanges.setOnClickListener {
+            Log.d("userId", idUserToModify.toString())
         }
     }
 
