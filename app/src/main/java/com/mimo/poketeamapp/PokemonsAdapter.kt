@@ -53,22 +53,31 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
             }
 
             binding.add.setOnClickListener {
-                if (pokemon.url != null) {
-                    db.pokemonDao().addFavorite(
-                        pokemon.name,
-                        pokemon.url,
-                        pokemon.id,
-                        pokemon.sprites?.other?.home?.front_default!!,
-                        pokemon.base_experience)
+                val count = db.pokemonDao().getFavoritesCount()
+                if(count < maxPokemonsToBeFavorites ) {
+                    if(db.pokemonDao().isPokemonFavorite(pokemon.id)) {
+                        Toast.makeText(parent.context, R.string.already_favorite, Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (pokemon.url != null) {
+                            db.pokemonDao().addFavorite(
+                                pokemon.name,
+                                pokemon.url,
+                                pokemon.id,
+                                pokemon.sprites?.other?.home?.front_default!!,
+                                pokemon.base_experience)
+                        } else {
+                            db.pokemonDao().addFavorite(
+                                pokemon.name,
+                                "",
+                                pokemon.id,
+                                pokemon.sprites?.other?.home?.front_default!!,
+                                pokemon.base_experience)
+                        }
+                        Toast.makeText(parent.context, R.string.added_favorite, Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    db.pokemonDao().addFavorite(
-                        pokemon.name,
-                        "",
-                        pokemon.id,
-                        pokemon.sprites?.other?.home?.front_default!!,
-                        pokemon.base_experience)
+                    Toast.makeText(parent.context, R.string.favorite_max_reached, Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(parent.context, "Added to favorites!", Toast.LENGTH_SHORT).show()
             }
         }
     }

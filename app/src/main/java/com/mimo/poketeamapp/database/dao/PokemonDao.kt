@@ -19,4 +19,10 @@ interface PokemonDao {
 
     @Query("UPDATE PokemonEntity SET favorite = 0 WHERE api_pokemon_id = :api_pokemon_id")
     fun removeFavorite(api_pokemon_id: String)
+
+    @Query("SELECT COUNT(*) FROM PokemonEntity WHERE favorite = 1")
+    fun getFavoritesCount(): Int
+
+    @Query("SELECT favorite FROM PokemonEntity WHERE api_pokemon_id = :api_pokemon_id")
+    fun isPokemonFavorite(api_pokemon_id: String): Boolean
 }

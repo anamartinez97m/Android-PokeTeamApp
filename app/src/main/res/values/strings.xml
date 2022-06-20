@@ -67,5 +67,8 @@
     <string name="remove">Remove</string>
     <string name="add">Add</string>
     <string name="modify_profile_picture">Set profile picture</string>
+    <string name="added_favorite">Added to favorite!</string>
+    <string name="favorite_max_reached">You have reached favorites max!</string>
+    <string name="already_favorite">Pokemon is already on your team. Please choose another one.</string>
 
 </resources>

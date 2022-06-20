@@ -1,9 +1,11 @@
 package com.mimo.poketeamapp.settings
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
@@ -13,12 +15,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import androidx.core.os.ConfigurationCompat
 import androidx.room.Room
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivitySettingsBinding
 import com.squareup.picasso.Picasso
 import java.util.*
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -54,14 +58,14 @@ class SettingsActivity : AppCompatActivity() {
         binding.checkBoxLanguageEn.setOnClickListener{
             binding.checkBoxLanguageEs.isChecked = false
             val localeHelper = LocaleHelper()
-            context = localeHelper.setLocale(this, "en")
+            context = localeHelper.setLocale(this, "en_US")
             res = context.resources
         }
 
         binding.checkBoxLanguageEs.setOnClickListener{
             binding.checkBoxLanguageEn.isChecked = false
-            val localeHelper: LocaleHelper = LocaleHelper()
-            context = localeHelper.setLocale(this, "es")
+            val localeHelper = LocaleHelper()
+            context = localeHelper.setLocale(this, "es_ES")
             res = context.resources
         }
     }

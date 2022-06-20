@@ -3,6 +3,7 @@ package com.mimo.poketeamapp.settings
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.util.Log
 import androidx.preference.PreferenceManager
 import java.util.*
 
@@ -23,7 +24,7 @@ class LocaleHelper {
     }
 
     private fun updateResources(context: Context, language: String): Context {
-        val locale: Locale = Locale(language)
+        val locale = Locale(language)
         Locale.setDefault(locale)
 
         val conf: Configuration = context.resources.configuration

@@ -1,12 +1,9 @@
 package com.mimo.poketeamapp.login
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -18,8 +15,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -28,7 +23,6 @@ import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
-import com.mimo.poketeamapp.greeting
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.squareup.picasso.Picasso
 
@@ -41,8 +35,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        Log.d("flavor", greeting)
 
         val db = Room
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")

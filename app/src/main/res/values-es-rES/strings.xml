@@ -53,4 +53,7 @@
     <string name="remove">Eliminar</string>
     <string name="add">Añadir</string>
     <string name="modify_profile_picture">Elegir foto de perfil</string>
+    <string name="added_favorite">¡Añadido a favoritos!</string>
+    <string name="favorite_max_reached">¡Has llegado al máximo de favoritos!</string>
+    <string name="already_favorite">El pokemon ya se encuentra en tu equipo. Por favor, elige otro.</string>
 </resources>
