@@ -12,7 +12,7 @@ class ForgotPasswordDataSource(private val db: AppDatabase) {
             val userDao = db.userDao()
 
             if(db.userDao().doesUserExistWithSamePassword(email, password) == 0) {
-                userDao.updateUserPassword(email, password)
+                userDao.updateUserPasswordFromEmail(email, password)
                 Result.Success("Ok")
             } else {
                 Result.Error(IOException("Error in registration"))

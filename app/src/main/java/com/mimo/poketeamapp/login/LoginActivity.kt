@@ -78,6 +78,9 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
+                val user = db.userDao().getUser(username.text.toString(), password.text.toString())
+                Log.d("idLogin", user.id.toString())
+
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("username", username.text.toString())
                 intent.putExtra("password", password.text.toString())

@@ -8,21 +8,21 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.navigation.NavigationView
+import com.mimo.poketeamapp.databinding.ActivityMainBinding
 import com.mimo.poketeamapp.model.Pokemon
-import com.mimo.poketeamapp.model.Pokemons
 import com.mimo.poketeamapp.network.GsonRequest
 import com.mimo.poketeamapp.network.RequestManager
 import com.mimo.poketeamapp.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var binding: ActivityMainBinding
     private var count = 1126
     private lateinit var pokemonView: PokemonView
     private lateinit var textViewError404: TextView
@@ -32,26 +32,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.my_toolbar)
+        val toolbar: Toolbar = binding.myToolbar
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = binding.drawerLayout
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        val navigationView: NavigationView = binding.navigationView
         navigationView.setNavigationItemSelectedListener(this)
 
-        val swipeRefresh: SwipeRefreshLayout = findViewById(R.id.swipe_refresh)
-        val textViewSwipeRefresh: TextView = findViewById(R.id.textview_swipe_refresh)
+        val swipeRefresh: SwipeRefreshLayout = binding.swipeRefresh
+        val textViewSwipeRefresh: TextView = binding.textviewSwipeRefresh
 
-        pokemonView = findViewById(R.id.pokemon_view)
-        textViewError404 = findViewById(R.id.textview_error_404)
+        pokemonView = binding.pokemonView
+        textViewError404 = binding.textviewError404
         textViewError404.visibility = View.GONE
 
         // TODO: Change for placeholders
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = binding.drawerLayout
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
@@ -86,7 +87,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.menu_settings -> {
-            // User chose the "Settings" item, show the app settings UI...
             val intent = Intent(this, SettingsActivity::class.java)
             intent.putExtra("username", username)
             intent.putExtra("password", password)
@@ -98,8 +98,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             true
         }
         else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
         }
     }

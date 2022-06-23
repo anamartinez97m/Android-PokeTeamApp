@@ -3,7 +3,6 @@ package com.mimo.poketeamapp
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -38,7 +37,7 @@ class PokeTeamActivity : AppCompatActivity() {
         initList()
         showPokemons(pokemonsToShow)
 
-        val toolbar: Toolbar = findViewById(R.id.my_toolbar)
+        val toolbar: Toolbar = binding.myToolbar
         toolbar.setTitle(R.string.title_pokemon_team)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

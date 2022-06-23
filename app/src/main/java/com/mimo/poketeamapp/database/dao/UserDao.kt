@@ -22,5 +22,11 @@ interface UserDao {
     fun doesUserExistWithSamePassword(email: String, password: String): Int
 
     @Query("UPDATE USER SET password = :password WHERE email = :email")
-    fun updateUserPassword(email: String, password: String)
+    fun updateUserPasswordFromEmail(email: String, password: String)
+
+    @Query("UPDATE USER SET email = :email WHERE id = :userId")
+    fun updateUserEmail(email: String, userId: Int)
+
+    @Query("UPDATE USER SET password = :password WHERE id = :userId")
+    fun updateUserPassword(password: String, userId: Int)
 }
