@@ -66,14 +66,14 @@ class SettingsActivity : AppCompatActivity() {
         checkboxEnglish.isChecked = Locale.getDefault().toString() == "en_US"
         checkboxSpanish.isChecked = Locale.getDefault().toString() == "es_ES"
 
-        checkboxEnglish.setOnClickListener{
+        checkboxEnglish.setOnClickListener {
             checkboxSpanish.isChecked = false
             val localeHelper = LocaleHelper()
             context = localeHelper.setLocale(this, "en_US")
             res = context.resources
         }
 
-        checkboxSpanish.setOnClickListener{
+        checkboxSpanish.setOnClickListener {
             checkboxEnglish.isChecked = false
             val localeHelper = LocaleHelper()
             context = localeHelper.setLocale(this, "es_ES")
@@ -91,20 +91,16 @@ class SettingsActivity : AppCompatActivity() {
             idUserToModify = user.id
         }
 
-//        GlobalScope.launch(Dispatchers.IO) {
-//            dataStoreManager.getFromDataStore().catch { e ->
-//                e.printStackTrace()
-//            }.collect {
-//                withContext(Dispatchers.Main) {
-//                    imageUri = it.image
-//                }
-//            }
-//        }
-
-        if(this::imageUri.isInitialized && imageUri.isNotEmpty()) {
-            profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
-            val temporal = "content://media/external/images/media/19723"
-            Picasso.get().load(temporal).into(binding.profilePictureSettings)
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStoreManager.getFromDataStore().catch { e ->
+                e.printStackTrace()
+            }.collect {
+                withContext(Dispatchers.Main) {
+                    imageUri = it.image
+                    profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
+                    Picasso.get().load(imageUri).into(profilePicture)
+                }
+            }
         }
 
         profilePicture.setOnClickListener {
@@ -127,15 +123,15 @@ class SettingsActivity : AppCompatActivity() {
                     startActivity(loginIntent)
                 }
                 if(profilePicture.drawable.current::class.simpleName.toString() == "PicassoDrawable") {
-//                    GlobalScope.launch(Dispatchers.IO) {
-//                        dataStoreManager.saveToDataStore(
-//                            user = UserModel(
-//                                id = idUserToModify.toString(),
-//                                email = binding.modifyUserEmail.text.toString(),
-//                                image = imageUri
-//                            )
-//                        )
-//                    }
+                    GlobalScope.launch(Dispatchers.IO) {
+                        dataStoreManager.saveToDataStore(
+                            user = UserModel(
+                                id = idUserToModify.toString(),
+                                email = editTextEmail.text.toString(),
+                                image = imageUri
+                            )
+                        )
+                    }
                 }
             }
         }

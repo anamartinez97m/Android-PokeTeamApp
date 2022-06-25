@@ -12,11 +12,11 @@ import com.mimo.poketeamapp.databinding.PokemonItemBinding
 import com.mimo.poketeamapp.model.Pokemon
 import com.squareup.picasso.Picasso
 
-class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter<PokemonsAdapter.PokemonViewHolder>() {
+class PokemonsAdapter(private var pokemons: List<Pokemon>): RecyclerView.Adapter<PokemonsAdapter.PokemonViewHolder>() {
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = pokemons[position]
-        holder.bind(item)
+        holder.bind(item, this, position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PokemonViewHolder(
@@ -25,7 +25,10 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
 
     override fun getItemCount() = pokemons.size
 
-    class PokemonViewHolder(view: View, private val parent: ViewGroup): RecyclerView.ViewHolder(view) {
+    class PokemonViewHolder(
+        view: View,
+        private val parent: ViewGroup
+    ): RecyclerView.ViewHolder(view) {
         private val binding = PokemonItemBinding.bind(view)
         private val add = binding.add
         private val remove = binding.remove
@@ -40,7 +43,11 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
             .build()
 
         @SuppressLint("NotifyDataSetChanged")
-        fun bind(pokemon: Pokemon) {
+        fun bind(
+            pokemon: Pokemon,
+            pokemonsAdapter: PokemonsAdapter,
+            position: Int
+        ) {
             if(parent.context is PokeTeamActivity) {
                 add.visibility = View.GONE
             } else {
@@ -56,8 +63,9 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
 
             remove.setOnClickListener {
                 db.pokemonDao().removeFavorite(pokemon.id)
-                // TODO lograr
-                //bindingAdapter?.notifyDataSetChanged()
+                pokemonsAdapter.pokemons = pokemonsAdapter.pokemons.minus(pokemon)
+                pokemonsAdapter.notifyItemRemoved(position)
+                pokemonsAdapter.notifyItemRangeRemoved(position, pokemonsAdapter.itemCount)
             }
 
             add.setOnClickListener {
