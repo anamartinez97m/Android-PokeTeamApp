@@ -38,4 +38,25 @@
         <item name="android:background">@drawable/button_save_border</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="aboutTitleStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/md_purple_900</item>
+    </style>
+
+    <style name="aboutTextStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/md_purple_800</item>
+    </style>
+
+    <style name="aboutLinkStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColorLink">@color/md_purple_500</item>
+    </style>
+
+    <style name="mainTextStylesLight" parent="Theme.MaterialComponents.Light">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 </resources>

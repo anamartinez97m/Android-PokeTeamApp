@@ -56,4 +56,7 @@
     <string name="added_favorite">¡Añadido a favoritos!</string>
     <string name="favorite_max_reached">¡Has llegado al máximo de favoritos!</string>
     <string name="already_favorite">El pokemon ya se encuentra en tu equipo. Por favor, elige otro.</string>
+    <string name="pokemonview_types">"Tipos: "</string>
+    <string name="base_experience">"Experiencia base: "</string>
+    <string name="name">"Nombre: "</string>
 </resources>

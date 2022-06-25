@@ -22,11 +22,11 @@
     <TextView
         android:id="@+id/about_app_name"
         android:layout_width="219dp"
-        android:layout_height="32dp"
+        android:layout_height="45dp"
         android:layout_marginTop="23dp"
+        android:layout_marginStart="20dp"
         android:text="@string/app_name"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        style="@style/aboutTitleStylesLight"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -34,21 +34,23 @@
 
     <TextView
         android:id="@+id/about_app_version"
+        style="@style/aboutTextStylesLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="24dp"
         android:text="@string/app_version"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_app_name" />
 
     <TextView
         android:id="@+id/about_programmer"
+        style="@style/aboutTextStylesLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/copyright"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_app_version" />
@@ -57,9 +59,10 @@
         android:id="@+id/about_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/app_subject"
+        style="@style/aboutTextStylesLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_programmer" />
 
@@ -67,9 +70,10 @@
         android:id="@+id/about_mimo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/app_mimo"
+        style="@style/aboutTextStylesLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_subject" />
 
@@ -77,9 +81,10 @@
         android:id="@+id/about_university"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/app_university"
+        style="@style/aboutTextStylesLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_mimo" />
 
@@ -87,10 +92,11 @@
         android:id="@+id/about_api_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/app_api_text"
         android:textStyle="bold"
+        style="@style/aboutTextStylesLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_university" />
 
@@ -98,9 +104,10 @@
         android:id="@+id/about_api_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/app_api_link"
+        style="@style/aboutLinkStylesLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_api_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

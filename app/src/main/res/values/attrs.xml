@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PokemonViewAttrs">
+        <attr name="pokemonview_image" format="string"/>
         <attr name="pokemonview_name" format="string"/>
+        <attr name="pokemonview_base_experience" format="string"/>
+        <attr name="pokemonview_types" format="string"/>
+        <attr name="pokemonview_types_list" format="string"/>
     </declare-styleable>
 </resources>

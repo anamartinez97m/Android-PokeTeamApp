@@ -1,5 +1,6 @@
 package com.mimo.poketeamapp
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,32 +27,40 @@ class PokemonsAdapter(private val pokemons: List<Pokemon>): RecyclerView.Adapter
 
     class PokemonViewHolder(view: View, private val parent: ViewGroup): RecyclerView.ViewHolder(view) {
         private val binding = PokemonItemBinding.bind(view)
+        private val add = binding.add
+        private val remove = binding.remove
+        private val pokemonName = binding.pokemonName
+        private val pokemonBaseExperience = binding.pokemonBaseExperience
+        private val pokemonImage = binding.pokemonImage
+
         val db = Room
             .databaseBuilder(parent.context, AppDatabase::class.java, "pokemon-database")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
 
+        @SuppressLint("NotifyDataSetChanged")
         fun bind(pokemon: Pokemon) {
             if(parent.context is PokeTeamActivity) {
-                binding.add.visibility = View.GONE
+                add.visibility = View.GONE
             } else {
-                binding.remove.visibility = View.GONE
+                remove.visibility = View.GONE
             }
-            binding.pokemonName.text = pokemon.name
-            binding.pokemonBaseExperience.text = pokemon.base_experience.toString()
+            pokemonName.text = pokemon.name
+            pokemonBaseExperience.text = pokemon.base_experience.toString()
             if(pokemon.sprites == null && pokemon.image != null && pokemon.image.isNotEmpty()) {
-                Picasso.get().load(pokemon.image).into(binding.pokemonImage)
+                Picasso.get().load(pokemon.image).into(pokemonImage)
             } else {
-                Picasso.get().load(pokemon.sprites?.other?.home?.front_default).into(binding.pokemonImage)
+                Picasso.get().load(pokemon.sprites?.other?.home?.front_default).into(pokemonImage)
             }
 
-            binding.remove.setOnClickListener {
+            remove.setOnClickListener {
                 db.pokemonDao().removeFavorite(pokemon.id)
-                // TODO lograr notifydatasetchanged
+                // TODO lograr
+                //bindingAdapter?.notifyDataSetChanged()
             }
 
-            binding.add.setOnClickListener {
+            add.setOnClickListener {
                 val count = db.pokemonDao().getFavoritesCount()
                 if(count < maxPokemonsToBeFavorites ) {
                     if(db.pokemonDao().isPokemonFavorite(pokemon.id)) {

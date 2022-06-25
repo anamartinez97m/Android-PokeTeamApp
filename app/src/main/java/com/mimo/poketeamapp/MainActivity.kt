@@ -1,5 +1,6 @@
 package com.mimo.poketeamapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var count = 1126
     private lateinit var pokemonView: PokemonView
     private lateinit var textViewError404: TextView
+    private lateinit var loading: ProgressBar
 
     private lateinit var username: String
     private lateinit var password: String
@@ -54,12 +57,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pokemonView = binding.pokemonView
         textViewError404 = binding.textviewError404
         textViewError404.visibility = View.GONE
+        loading = binding.loading
+        loading.visibility = View.VISIBLE
 
         // TODO: Change for placeholders
         val randomCount = rand(count)
         textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount"
         doRequest(randomCount)
         swipeRefresh.setOnRefreshListener {
+            loading.visibility = View.VISIBLE
+            textViewError404.visibility = View.GONE
             val randomCount2 = rand(count)
             textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount2"
             doRequest(randomCount2)
@@ -128,18 +135,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun doRequest(id: Int) {
         val url = "https://pokeapi.co/api/v2/pokemon/$id"
         val gsonRequest = GsonRequest(url,
             Pokemon::class.java, null,
             { response ->
+                loading.visibility = View.GONE
                 pokemonView.visibility = View.VISIBLE
                 textViewError404.visibility = View.GONE
-                Log.d("response name", response.name)
-                Log.d("response base experience", response.base_experience.toString())
-                Log.d("response types", response.types.contentToString())
+                pokemonView.setPokemonViewName(getString(R.string.name) +response.name)
+                pokemonView.setPokemonViewBaseExperience(getString(R.string.base_experience) + response.base_experience.toString())
+                pokemonView.setPokemonViewTypes(getString(R.string.pokemonview_types))
+                pokemonView.setPokemonViewImage(response.sprites?.other?.home?.front_default.toString())
+                var strTypesList = ""
+                response.types?.forEachIndexed { index, element ->
+                    strTypesList = strTypesList.plus(element.type.name)
+                    if(index != response.types.lastIndex) {
+                        strTypesList = strTypesList.plus(", ")
+                    }
+                }
+                pokemonView.setPokemonViewTypesList(strTypesList)
             },
             {
+                // TODO: Change for placeholders
+                loading.visibility = View.GONE
                 pokemonView.visibility = View.GONE
                 textViewError404.visibility = View.VISIBLE
                 textViewError404.text = "Pokemon no encontrado. \nPor favor, recargue de nuevo la página."

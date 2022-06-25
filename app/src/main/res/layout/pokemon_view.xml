@@ -7,44 +7,45 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
         <ImageView
             android:id="@+id/pokemon_image"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:padding="24dp"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:padding="24dp"/>
     </FrameLayout>
 
     <TextView
         android:id="@+id/pokemon_name"
+        style="@style/mainTextStylesLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/pokemon_base_experience"
+        style="@style/mainTextStylesLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="base_experience"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="15dp"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/pokemon_types"
+        style="@style/mainTextStylesLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="types"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="15dp"
+        android:gravity="center"/>
 
-    <ListView
+    <TextView
         android:id="@+id/pokemon_types_list"
+        style="@style/mainTextStylesLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginTop="15dp"
+        android:gravity="center"/>
 
 </LinearLayout>

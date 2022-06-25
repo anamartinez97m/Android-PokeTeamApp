@@ -1,7 +1,6 @@
 package com.mimo.poketeamapp
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
