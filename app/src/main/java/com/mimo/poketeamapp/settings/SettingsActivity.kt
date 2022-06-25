@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import java.util.*
 
+
 @DelicateCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
 
@@ -63,21 +64,31 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        checkboxEnglish.isChecked = Locale.getDefault().toString() == "en_US"
-        checkboxSpanish.isChecked = Locale.getDefault().toString() == "es_ES"
+        checkboxEnglish.isChecked = Locale.getDefault().toString() == "en"
+        checkboxSpanish.isChecked = Locale.getDefault().toString() == "es"
 
         checkboxEnglish.setOnClickListener {
             checkboxSpanish.isChecked = false
-            val localeHelper = LocaleHelper()
-            context = localeHelper.setLocale(this, "en_US")
-            res = context.resources
+//            val localeHelper = LocaleHelper()
+//            context = localeHelper.setLocale(this, "en_US")
+//            res = context.resources
+            setAppLocale(this, "en")
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
+            loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(loginIntent)
         }
 
         checkboxSpanish.setOnClickListener {
             checkboxEnglish.isChecked = false
-            val localeHelper = LocaleHelper()
-            context = localeHelper.setLocale(this, "es_ES")
-            res = context.resources
+            setAppLocale(this, "es")
+//            val localeHelper = LocaleHelper()
+//            context = localeHelper.setLocale(this, "es_ES")
+//            res = context.resources
+            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
+            loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(loginIntent)
         }
 
         val intent: Intent = intent
@@ -122,19 +133,30 @@ class SettingsActivity : AppCompatActivity() {
                     loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(loginIntent)
                 }
-                if(profilePicture.drawable.current::class.simpleName.toString() == "PicassoDrawable") {
-                    GlobalScope.launch(Dispatchers.IO) {
-                        dataStoreManager.saveToDataStore(
-                            user = UserModel(
-                                id = idUserToModify.toString(),
-                                email = editTextEmail.text.toString(),
-                                image = imageUri
+                if(profilePicture.drawable != null) {
+                    if(profilePicture.drawable.current::class.simpleName.toString() == "PicassoDrawable") {
+                        GlobalScope.launch(Dispatchers.IO) {
+                            dataStoreManager.saveToDataStore(
+                                user = UserModel(
+                                    id = idUserToModify.toString(),
+                                    email = editTextEmail.text.toString(),
+                                    image = imageUri
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
         }
+    }
+
+    fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
     override fun onSupportNavigateUp(): Boolean {

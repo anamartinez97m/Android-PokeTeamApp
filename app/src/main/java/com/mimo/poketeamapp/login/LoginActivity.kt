@@ -3,6 +3,8 @@ package com.mimo.poketeamapp.login
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.mimo.poketeamapp.LocalizationActivity
 import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
@@ -25,8 +28,9 @@ import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.squareup.picasso.Picasso
+import java.util.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : LocalizationActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
@@ -34,7 +38,8 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val db = Room
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
@@ -43,8 +48,31 @@ class LoginActivity : AppCompatActivity() {
             .build()
         // TODO: cambiar fallback a manejo de migraciones
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        val languageToLoad = "en" // your language
+//        val locale = Locale(languageToLoad)
+//        val config = Configuration()
+//        config.setLocale(locale) // set accordingly
+//        config.setLayoutDirection(locale)
+//// eg. if Hindi then selectedLocale = new Locale("hi");
+//// eg. if Hindi then selectedLocale = new Locale("hi");
+//        Locale.setDefault(locale) // has no effect
+//
+//        val res: Resources = applicationContext.resources
+//        res.updateConfiguration(config, res.displayMetrics)
+
+//        val locale = Locale(languageToLoad)
+//        Locale.setDefault(locale)
+//
+//        val config = applicationContext.resources.configuration
+//        config.setLocale(locale)
+//        applicationContext.createConfigurationContext(config)
+//        createConfigurationContext(config)
+//        baseContext.resources.updateConfiguration(
+//            config,
+//            baseContext.resources.displayMetrics
+//        )
+
+//        this.setContentView(binding.root)
 
         val username = binding.username
         val password = binding.password
