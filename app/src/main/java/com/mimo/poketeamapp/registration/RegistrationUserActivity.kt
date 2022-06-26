@@ -20,6 +20,7 @@ import com.mimo.poketeamapp.MainActivity
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivityRegisterUserBinding
+import com.mimo.poketeamapp.login.LoginActivity
 import com.mimo.poketeamapp.login.afterTextChanged
 
 class RegisterUserActivity : AppCompatActivity() {
@@ -72,7 +73,7 @@ class RegisterUserActivity : AppCompatActivity() {
                 showRegistrationFailed(registrationResult.error)
             }
             if (registrationResult.success != null) {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
         })

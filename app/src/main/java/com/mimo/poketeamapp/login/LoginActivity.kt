@@ -4,19 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -28,12 +25,19 @@ import com.mimo.poketeamapp.databinding.ActivityLoginBinding
 import com.mimo.poketeamapp.forgotPassword.ForgotPasswordActivity
 import com.mimo.poketeamapp.registration.RegisterUserActivity
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
+
+@DelicateCoroutinesApi
 class LoginActivity : LocalizationActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var imageUri: String
+    private var lang: String = ""
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,32 +51,6 @@ class LoginActivity : LocalizationActivity() {
             .fallbackToDestructiveMigration()
             .build()
 
-//        val languageToLoad = "en" // your language
-//        val locale = Locale(languageToLoad)
-//        val config = Configuration()
-//        config.setLocale(locale) // set accordingly
-//        config.setLayoutDirection(locale)
-//// eg. if Hindi then selectedLocale = new Locale("hi");
-//// eg. if Hindi then selectedLocale = new Locale("hi");
-//        Locale.setDefault(locale) // has no effect
-//
-//        val res: Resources = applicationContext.resources
-//        res.updateConfiguration(config, res.displayMetrics)
-
-//        val locale = Locale(languageToLoad)
-//        Locale.setDefault(locale)
-//
-//        val config = applicationContext.resources.configuration
-//        config.setLocale(locale)
-//        applicationContext.createConfigurationContext(config)
-//        createConfigurationContext(config)
-//        baseContext.resources.updateConfiguration(
-//            config,
-//            baseContext.resources.displayMetrics
-//        )
-
-//        this.setContentView(binding.root)
-
         val username = binding.username
         val password = binding.password
         val forgotPassword = binding.forgotPassword
@@ -80,6 +58,19 @@ class LoginActivity : LocalizationActivity() {
         val login = binding.login
         val loading = binding.loading
         val picture = binding.profilePictureLogin
+
+        GlobalScope.launch(Dispatchers.Main) {
+            dataStoreManager.getFromDataStore().catch { e ->
+                e.printStackTrace()
+            }.collect {
+                withContext(Dispatchers.Main) {
+                    imageUri = it.image
+                    lang = it.preferredLanguage
+                    setAppLocale(this@LoginActivity, lang)
+                    refreshLoginResources()
+                }
+            }
+        }
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory(db))
             .get(LoginViewModel::class.java)
@@ -106,11 +97,12 @@ class LoginActivity : LocalizationActivity() {
             }
             if (loginResult.success != null) {
                 val user = db.userDao().getUser(username.text.toString(), password.text.toString())
-                Log.d("idLogin", user.id.toString())
 
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("username", username.text.toString())
                 intent.putExtra("password", password.text.toString())
+                intent.putExtra("imageUri", imageUri)
+                intent.putExtra("language", lang)
                 startActivity(intent)
             }
         })
@@ -179,8 +171,26 @@ class LoginActivity : LocalizationActivity() {
         finish()
     }
 
+    private fun refreshLoginResources() {
+        binding.username.hint = getString(R.string.prompt_email)
+        binding.password.hint = getString(R.string.prompt_password)
+        binding.forgotPassword.text = getString(R.string.forgot_password)
+        binding.login.text = getString(R.string.action_sign_in_short)
+        binding.stillNotConnected.text = getString(R.string.still_not_connected)
+        binding.signUp.text = getString(R.string.sign_up)
+    }
+
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 }
 

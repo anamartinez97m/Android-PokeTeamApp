@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,7 +20,6 @@ import com.mimo.poketeamapp.model.Pokemon
 import com.mimo.poketeamapp.network.GsonRequest
 import com.mimo.poketeamapp.network.RequestManager
 import com.mimo.poketeamapp.settings.SettingsActivity
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,6 +31,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var username: String
     private lateinit var password: String
+    private lateinit var imageUri: String
+    private lateinit var language: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val intent: Intent = intent
         username = intent.getStringExtra("username").toString()
         password = intent.getStringExtra("password").toString()
+        imageUri = intent.getStringExtra("imageUri").toString()
+        language = intent.getStringExtra("language").toString()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -97,6 +99,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this, SettingsActivity::class.java)
             intent.putExtra("username", username)
             intent.putExtra("password", password)
+            intent.putExtra("imageUri", imageUri)
+            intent.putExtra("language", language)
             startActivity(intent)
             true
         }
@@ -158,7 +162,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 pokemonView.setPokemonViewTypesList(strTypesList)
             },
             {
-                // TODO: Change for placeholders
                 loading.visibility = View.GONE
                 pokemonView.visibility = View.GONE
                 textViewError404.visibility = View.VISIBLE

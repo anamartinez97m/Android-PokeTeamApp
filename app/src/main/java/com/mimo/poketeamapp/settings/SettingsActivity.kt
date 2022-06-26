@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.room.Room
+import com.mimo.poketeamapp.LocalizationActivity
 import com.mimo.poketeamapp.R
 import com.mimo.poketeamapp.data.DataStoreManager
 import com.mimo.poketeamapp.database.AppDatabase
@@ -29,15 +29,14 @@ import java.util.*
 
 
 @DelicateCoroutinesApi
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : LocalizationActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var db: AppDatabase
-    private lateinit var context: Context
-    private lateinit var res: Resources
     private var idUserToModify: Int = 0
     private lateinit var imageUri: String
-    private lateinit var dataStoreManager: DataStoreManager
+//    lateinit var dataStoreManager: DataStoreManager
+    private var lang: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
             .allowMainThreadQueries()
             .build()
-        dataStoreManager = DataStoreManager(this@SettingsActivity)
+//        dataStoreManager = getDataStore()
 
         val toolbar: Toolbar = binding.myToolbar
         val profilePicture = binding.profilePictureSettings
@@ -69,36 +68,12 @@ class SettingsActivity : AppCompatActivity() {
             buttonSave.alpha = .5f
         }
 
-        checkboxEnglish.isChecked = Locale.getDefault().toString() == "en"
-        checkboxSpanish.isChecked = Locale.getDefault().toString() == "es"
-
-        checkboxEnglish.setOnClickListener {
-            checkboxSpanish.isChecked = false
-//            val localeHelper = LocaleHelper()
-//            context = localeHelper.setLocale(this, "en_US")
-//            res = context.resources
-            setAppLocale(this, "en")
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-            loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(loginIntent)
-        }
-
-        checkboxSpanish.setOnClickListener {
-            checkboxEnglish.isChecked = false
-            setAppLocale(this, "es")
-//            val localeHelper = LocaleHelper()
-//            context = localeHelper.setLocale(this, "es_ES")
-//            res = context.resources
-            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-            loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(loginIntent)
-        }
-
         val intent: Intent = intent
         val username = intent.getStringExtra("username")
         val password = intent.getStringExtra("password")
+        imageUri = intent.getStringExtra("imageUri").toString()
+        lang = intent.getStringExtra("language").toString()
+
         editTextEmail.setText(username.toString())
         editTextPassword.setText(password.toString())
 
@@ -107,16 +82,36 @@ class SettingsActivity : AppCompatActivity() {
             idUserToModify = user.id
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStoreManager.getFromDataStore().catch { e ->
-                e.printStackTrace()
-            }.collect {
-                withContext(Dispatchers.Main) {
-                    imageUri = it.image
-                    profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
-                    Picasso.get().load(imageUri).into(profilePicture)
-                }
-            }
+        if(imageUri != null && imageUri.isNotEmpty()) {
+            profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
+            Picasso.get().load(imageUri).into(profilePicture)
+        }
+
+//        GlobalScope.launch(Dispatchers.IO) {
+//            dataStoreManager.getFromDataStore().catch { e ->
+//                e.printStackTrace()
+//            }.collect {
+//                withContext(Dispatchers.Main) {
+//
+//                    profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
+//                    Picasso.get().load(imageUri).into(profilePicture)
+//                }
+//            }
+//        }
+
+        checkboxEnglish.isChecked = lang == "en"
+        checkboxSpanish.isChecked = lang == "es" || lang == "c"
+
+        checkboxEnglish.setOnClickListener {
+            checkboxSpanish.isChecked = false
+            buttonSave.isEnabled = true
+            buttonSave.alpha = 1F
+        }
+
+        checkboxSpanish.setOnClickListener {
+            checkboxEnglish.isChecked = false
+            buttonSave.isEnabled = true
+            buttonSave.alpha = 1F
         }
 
         profilePicture.setOnClickListener {
@@ -140,34 +135,47 @@ class SettingsActivity : AppCompatActivity() {
             if(idUserToModify != 0) {
                 if (editTextEmail.text.isNotEmpty() && editTextEmail.text.toString() != username) {
                     db.userDao().updateUserEmail(editTextEmail.text.toString(), idUserToModify)
-                    val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-                    loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(loginIntent)
                 }
                 if (editTextPassword.text.isNotEmpty() && editTextPassword.text.toString() != password) {
                     db.userDao().updateUserPassword(editTextPassword.text.toString(), idUserToModify)
-                    val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-                    loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(loginIntent)
                 }
-                if(profilePicture.drawable != null) {
+                if(profilePicture.drawable != null && profilePicture.isDirty) {
                     if(profilePicture.drawable.current::class.simpleName.toString() == "PicassoDrawable") {
-                        GlobalScope.launch(Dispatchers.IO) {
-                            dataStoreManager.saveToDataStore(
-                                user = UserModel(
-                                    id = idUserToModify.toString(),
-                                    email = editTextEmail.text.toString(),
-                                    image = imageUri
-                                )
-                            )
+                        if(checkboxEnglish.isChecked) {
+                            saveToDataStore("en")
+                        } else {
+                            saveToDataStore("es")
                         }
                     }
+                } else {
+                    if(checkboxEnglish.isChecked) {
+                        saveToDataStore("en")
+                        setAppLocale(this, "en")
+                    } else {
+                        saveToDataStore("es")
+                        setAppLocale(this, "es")
+                    }
                 }
+                val loginIntent = Intent(applicationContext, LoginActivity::class.java)
+                loginIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(loginIntent)
             }
         }
     }
 
-    fun setAppLocale(context: Context, language: String) {
+    private fun saveToDataStore(lang: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStoreManager.saveToDataStore(
+                user = UserModel(
+                    id = idUserToModify.toString(),
+                    image = imageUri,
+                    preferredLanguage = lang
+                )
+            )
+        }
+    }
+
+    private fun setAppLocale(context: Context, language: String) {
         val locale = Locale(language)
         Locale.setDefault(locale)
         val config = context.resources.configuration

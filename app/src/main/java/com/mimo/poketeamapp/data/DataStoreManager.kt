@@ -13,27 +13,30 @@ const val USER_DATASTORE = "datastore"
 
 class DataStoreManager(val context: Context) {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_DATASTORE)
+
+//    private val dataStore = context.globalDataStore(name = "settings_pref")
 
     companion object {
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_DATASTORE)
+
         val ID = stringPreferencesKey("USER_ID")
-        val EMAIL = stringPreferencesKey("USER_EMAIL")
         val IMAGE = stringPreferencesKey("USER_IMAGE")
+        val LANGUAGE = stringPreferencesKey("LANGUAGE")
     }
 
     suspend fun saveToDataStore(user: UserModel) {
         context.dataStore.edit {
             it[ID] = user.id
-            it[EMAIL] = user.email
             it[IMAGE] = user.image
+            it[LANGUAGE] = user.preferredLanguage
         }
     }
 
     suspend fun getFromDataStore() = context.dataStore.data.map {
         UserModel(
             id = it[ID] ?: "a",
-            email = it[EMAIL] ?: "b",
-            image = it[IMAGE] ?: "c",
+            image = it[IMAGE] ?: "b",
+            preferredLanguage = it[LANGUAGE] ?: "c",
         )
     }
 }
