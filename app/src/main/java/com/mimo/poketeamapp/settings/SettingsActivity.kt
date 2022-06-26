@@ -10,21 +10,17 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.room.Room
 import com.mimo.poketeamapp.LocalizationActivity
 import com.mimo.poketeamapp.R
-import com.mimo.poketeamapp.data.DataStoreManager
 import com.mimo.poketeamapp.database.AppDatabase
 import com.mimo.poketeamapp.databinding.ActivitySettingsBinding
 import com.mimo.poketeamapp.login.LoginActivity
 import com.mimo.poketeamapp.model.UserModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 
@@ -35,7 +31,6 @@ class SettingsActivity : LocalizationActivity() {
     private lateinit var db: AppDatabase
     private var idUserToModify: Int = 0
     private lateinit var imageUri: String
-//    lateinit var dataStoreManager: DataStoreManager
     private var lang: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +43,6 @@ class SettingsActivity : LocalizationActivity() {
             .databaseBuilder(applicationContext, AppDatabase::class.java, "pokemon-database")
             .allowMainThreadQueries()
             .build()
-//        dataStoreManager = getDataStore()
 
         val toolbar: Toolbar = binding.myToolbar
         val profilePicture = binding.profilePictureSettings
@@ -86,18 +80,6 @@ class SettingsActivity : LocalizationActivity() {
             profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
             Picasso.get().load(imageUri).into(profilePicture)
         }
-
-//        GlobalScope.launch(Dispatchers.IO) {
-//            dataStoreManager.getFromDataStore().catch { e ->
-//                e.printStackTrace()
-//            }.collect {
-//                withContext(Dispatchers.Main) {
-//
-//                    profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
-//                    Picasso.get().load(imageUri).into(profilePicture)
-//                }
-//            }
-//        }
 
         checkboxEnglish.isChecked = lang == "en"
         checkboxSpanish.isChecked = lang == "es" || lang == "c"

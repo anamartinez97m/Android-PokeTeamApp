@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         R.id.menu_nav_tutorial -> {
             val intent = Intent(this, TutorialActivity::class.java)
+            intent.putExtra("language", language)
             startActivity(intent)
             true
         }

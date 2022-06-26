@@ -113,7 +113,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 if(event.action == MotionEvent.ACTION_UP) {
                     if(event.rawX >= (password.right - password.compoundDrawables[drawableRight].bounds.width())) {
                         if(password.inputType == InputType.TYPE_CLASS_TEXT) {
-                            // TODO: no funciona del todo
                             password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
                         } else {
                             password.inputType = InputType.TYPE_CLASS_TEXT
