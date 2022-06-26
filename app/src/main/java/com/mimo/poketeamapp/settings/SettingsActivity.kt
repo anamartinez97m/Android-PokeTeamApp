@@ -64,6 +64,11 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        buttonSave.isEnabled = editTextEmail.isDirty || editTextPassword.isDirty
+        if(!buttonSave.isEnabled) {
+            buttonSave.alpha = .5f
+        }
+
         checkboxEnglish.isChecked = Locale.getDefault().toString() == "en"
         checkboxSpanish.isChecked = Locale.getDefault().toString() == "es"
 
@@ -116,7 +121,19 @@ class SettingsActivity : AppCompatActivity() {
 
         profilePicture.setOnClickListener {
             modifyProfilePicture()
+            buttonSave.isEnabled = true
+            buttonSave.alpha = 1F
             profilePicture.setColorFilter(Color.argb(0, 255, 255, 255))
+        }
+
+        editTextEmail.setOnClickListener {
+            buttonSave.isEnabled = true
+            buttonSave.alpha = 1F
+        }
+
+        editTextPassword.setOnClickListener {
+            buttonSave.isEnabled = true
+            buttonSave.alpha = 1F
         }
 
         buttonSave.setOnClickListener {

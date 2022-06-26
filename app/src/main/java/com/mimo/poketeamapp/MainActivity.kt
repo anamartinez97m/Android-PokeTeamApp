@@ -21,6 +21,7 @@ import com.mimo.poketeamapp.model.Pokemon
 import com.mimo.poketeamapp.network.GsonRequest
 import com.mimo.poketeamapp.network.RequestManager
 import com.mimo.poketeamapp.settings.SettingsActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -60,15 +61,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loading = binding.loading
         loading.visibility = View.VISIBLE
 
-        // TODO: Change for placeholders
         val randomCount = rand(count)
-        textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount"
+        textViewSwipeRefresh.text = getString(R.string.swipe_refresh_textview)
         doRequest(randomCount)
         swipeRefresh.setOnRefreshListener {
             loading.visibility = View.VISIBLE
             textViewError404.visibility = View.GONE
             val randomCount2 = rand(count)
-            textViewSwipeRefresh.text = "Número random entre [1 y $count]: $randomCount2"
+            textViewSwipeRefresh.text = getString(R.string.swipe_refresh_textview)
             doRequest(randomCount2)
             swipeRefresh.isRefreshing = false
         }
@@ -162,8 +162,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loading.visibility = View.GONE
                 pokemonView.visibility = View.GONE
                 textViewError404.visibility = View.VISIBLE
-                textViewError404.text = "Pokemon no encontrado. \nPor favor, recargue de nuevo la página."
-                Log.d("requestError", "Pokemon no encontrado. Por favor, recargue de nuevo la página.")
+                textViewError404.text = getString(R.string.api_pokemon_not_found)
             }
         )
         RequestManager.getInstance(this).addToRequestQueue(gsonRequest)

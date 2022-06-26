@@ -59,4 +59,6 @@
     <string name="pokemonview_types">"Tipos: "</string>
     <string name="base_experience">"Experiencia base: "</string>
     <string name="name">"Nombre: "</string>
+    <string name="swipe_refresh_textview">Por favor, recargue la página para cambiar el pokemon</string>
+    <string name="api_pokemon_not_found">Ups! Parece que este pokemon se ha ido de paseo</string>
 </resources>

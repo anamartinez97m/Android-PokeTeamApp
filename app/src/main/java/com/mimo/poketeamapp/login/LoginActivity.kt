@@ -46,7 +46,6 @@ class LoginActivity : LocalizationActivity() {
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
-        // TODO: cambiar fallback a manejo de migraciones
 
 //        val languageToLoad = "en" // your language
 //        val locale = Locale(languageToLoad)

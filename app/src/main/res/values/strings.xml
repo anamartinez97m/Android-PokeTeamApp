@@ -73,5 +73,7 @@
     <string name="pokemonview_types">"Types: "</string>
     <string name="base_experience">"Base Experience: "</string>
     <string name="name">"Name: "</string>
+    <string name="swipe_refresh_textview">Please, swipe down to change the pokemon</string>
+    <string name="api_pokemon_not_found">Ups! It seems that this pokemon has gone on a walk</string>
 
 </resources>
