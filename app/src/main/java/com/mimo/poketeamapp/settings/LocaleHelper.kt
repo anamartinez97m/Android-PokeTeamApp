@@ -12,32 +12,7 @@ import java.util.*
 
 
 class LocaleHelper {
-//    private val selectedLanguage: String = "Locale.Helper.Selected.Language"
-//
-//    fun setLocale(context: Context, language: String): Context {
-//        persist(context, language)
-//
-//        return updateResources(context, language)
-//    }
-//
-//    private fun persist(context: Context, language: String) {
-//        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-//        val editor: SharedPreferences.Editor = pref.edit()
-//        editor.putString(selectedLanguage, language)
-//        editor.apply()
-//    }
-//
-//    private fun updateResources(context: Context, language: String): Context {
-//        val locale = Locale(language)
-//        Locale.setDefault(locale)
-//
-//        val conf: Configuration = context.resources.configuration
-//        conf.setLocale(locale)
-//        conf.setLayoutDirection(locale)
-//
-//        return context.createConfigurationContext(conf)
-//    }
-private var mLocale: Locale? = null
+    private var mLocale: Locale? = null
 
     fun setLocale(locale: Locale) {
         mLocale = locale

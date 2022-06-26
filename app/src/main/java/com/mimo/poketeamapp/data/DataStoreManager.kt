@@ -13,9 +13,6 @@ const val USER_DATASTORE = "datastore"
 
 class DataStoreManager(val context: Context) {
 
-
-//    private val dataStore = context.globalDataStore(name = "settings_pref")
-
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_DATASTORE)
 
